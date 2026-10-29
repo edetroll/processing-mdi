@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="650" viewBox="0 0 900 650">
+<style>
+text{font-family:Arial,sans-serif;fill:#252a31;font-size:21px}
+.small{font-size:18px;fill:#52606d}
+.shape{fill:#fff;stroke:#6d7b88;stroke-width:2.5}
+.decision{fill:#e8f0f3;stroke:#376f82;stroke-width:3}
+.arrow{fill:none;stroke:#52606d;stroke-width:2.7;marker-end:url(#arrow)}
+</style>
+<defs>
+<marker id="arrow" markerWidth="11" markerHeight="11" refX="9" refY="3.5" orient="auto">
+<path d="M0,0 L0,7 L10,3.5 z" fill="#52606d"/>
+</marker>
+</defs>
+<rect width="900" height="650" rx="18" fill="#f8fafb"/>
+
+<rect class="shape" x="350" y="30" width="200" height="66" rx="32"/>
+<text x="450" y="71" text-anchor="middle">Végrehajtás</text>
+
+<path class="arrow" d="M450 96 V138"/>
+
+<polygon class="decision" points="450,138 585,218 450,298 315,218"/>
+<text x="450" y="210" text-anchor="middle">Feltétel</text>
+<text x="450" y="237" text-anchor="middle">igaz?</text>
+
+<!-- TRUE branch left -->
+<path class="arrow" d="M315 218 H205 V340"/>
+<text class="small" x="245" y="202">igaz</text>
+<rect class="shape" x="80" y="340" width="250" height="82" rx="10"/>
+<text x="205" y="375" text-anchor="middle">Igaz ág</text>
+<text x="205" y="404" text-anchor="middle">utasításai</text>
+
+<!-- FALSE branch right -->
+<path class="arrow" d="M585 218 H695 V340"/>
+<text class="small" x="620" y="202">hamis</text>
+<rect class="shape" x="570" y="340" width="250" height="82" rx="10"/>
+<text x="695" y="375" text-anchor="middle">Hamis ág</text>
+<text x="695" y="404" text-anchor="middle">utasításai</text>
+
+<!-- balanced convergence -->
+<path class="arrow" d="M205 422 V490 H430"/>
+<path class="arrow" d="M695 422 V490 H470"/>
+<circle cx="450" cy="490" r="5" fill="#52606d"/>
+
+<path class="arrow" d="M450 495 V555"/>
+<rect class="shape" x="350" y="555" width="200" height="58" rx="29"/>
+<text x="450" y="592" text-anchor="middle">Folytatás</text>
+</svg>

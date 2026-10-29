@@ -1,0 +1,72 @@
+{
+  "site": {
+    "title": "Interaktív programozás I",
+    "subtitle": "Processing"
+  },
+  "chapters": [
+    {
+      "id": "01-ablak-grafikus-primitivak",
+      "order": 1,
+      "navNumber": "01",
+      "group": "Témakörök",
+      "title": "Ablak és grafikus primitívek",
+      "description": "Az első Processing-programoktól az egérrel vezérelt egyszerű animációkig.",
+      "file": "content/chapters/01-ablak-grafikus-primitivak/index.md"
+    },
+    {
+      "id": "02-metodusok-osztalyok",
+      "order": 2,
+      "navNumber": "02",
+      "group": "Témakörök",
+      "title": "Metódusok és összetett adatszerkezetek",
+      "description": "Ismétlődő rajzolási lépések kiszervezése saját metódusokba, majd összetartozó adatok és műveletek szervezése osztályba.",
+      "file": "content/chapters/02-metodusok-osztalyok/index.md"
+    },
+    {
+      "id": "03-elagazasok",
+      "order": 3,
+      "navNumber": "03",
+      "group": "Témakörök",
+      "title": "Elágazások",
+      "description": "Feltételek, logikai kifejezések, eseménykezelés és döntési helyzetek geometrikus példákon.",
+      "file": "content/chapters/03-elagazasok/index.md"
+    },
+    {
+      "id": "04-ciklusok",
+      "order": 4,
+      "navNumber": "04",
+      "group": "Témakörök",
+      "title": "Ciklusok",
+      "description": "While- és for-ciklusok, egymásba ágyazott ismétlések és generatív geometrikus kompozíciók.",
+      "file": "content/chapters/04-ciklusok/index.md"
+    },
+    {
+      "id": "05-tombok-listak",
+      "order": 5,
+      "navNumber": "05",
+      "group": "Témakörök",
+      "title": "Tömbök és listák",
+      "description": "Rögzített méretű tömbök, dinamikus ArrayList, mozgó négyzetek, ponthalmazok és vonalalakzatok.",
+      "file": "content/chapters/05-tombok-listak/index.md"
+    },
+    {
+      "id": "06-ketdimenzios-tombok",
+      "order": 6,
+      "navNumber": "06",
+      "group": "Témakörök",
+      "title": "Kétdimenziós tömbök",
+      "description": "Sorok és oszlopok, interaktív pixelrács és generatív Truchet-mintázatok.",
+      "file": "content/chapters/06-ketdimenzios-tombok/index.md"
+    },
+    {
+      "id": "07-kepek-beolvasasa-modositasa",
+      "order": 7,
+      "navNumber": "07",
+      "group": "Témakörök",
+      "title": "Képek beolvasása és módosítása",
+      "description": "Képbetöltés, szűrők, raszterpontok, fotómozaik színillesztéssel és képrészletek átrendezése.",
+      "file": "content/chapters/07-kepek-beolvasasa-modositasa/index.md",
+      "hideNext": true
+    }
+  ]
+}

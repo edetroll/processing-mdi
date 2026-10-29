@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="920" height="700" viewBox="0 0 920 700">
+<style>
+text{font-family:Arial,sans-serif;fill:#25313a;font-size:21px}
+.small{font-size:18px;fill:#52606d}
+.shape{fill:#fff;stroke:#6f7f8b;stroke-width:2.5}
+.decision{fill:#e8f0f3;stroke:#376f82;stroke-width:3}
+.arrow{fill:none;stroke:#52606d;stroke-width:2.7;marker-end:url(#a)}
+.path{fill:none;stroke:#52606d;stroke-width:2.7}
+</style>
+<defs><marker id="a" markerWidth="11" markerHeight="11" refX="9" refY="3.5" orient="auto"><path d="M0,0 L0,7 L10,3.5 z" fill="#52606d"/></marker></defs>
+<rect width="920" height="700" rx="18" fill="#f8fafb"/>
+<rect class="shape" x="355" y="25" width="210" height="58" rx="29"/>
+<text x="460" y="62" text-anchor="middle">Kezdés</text>
+<path class="arrow" d="M460 83 V120"/>
+<rect class="shape" x="320" y="120" width="280" height="68" rx="10"/>
+<text x="460" y="162" text-anchor="middle">Kezdőérték beállítása</text>
+<path class="arrow" d="M460 188 V225"/>
+<polygon class="decision" points="460,225 600,305 460,385 320,305"/>
+<text x="460" y="297" text-anchor="middle">Feltétel</text>
+<text x="460" y="324" text-anchor="middle">igaz?</text>
+<path class="arrow" d="M460 385 V430"/>
+<text class="small" x="480" y="414">igaz</text>
+<rect class="shape" x="320" y="430" width="280" height="70" rx="10"/>
+<text x="460" y="472" text-anchor="middle">Ciklus törzse</text>
+<path class="arrow" d="M460 500 V535"/>
+<rect class="shape" x="320" y="535" width="280" height="65" rx="10"/>
+<text x="460" y="575" text-anchor="middle">Léptetés</text>
+<path class="arrow" d="M320 567 H220 V305 H320"/>
+<path class="arrow" d="M600 305 H730 V653 H545"/>
+<text class="small" x="625" y="290">hamis</text>
+<rect class="shape" x="355" y="625" width="210" height="55" rx="28"/>
+<text x="460" y="660" text-anchor="middle">Folytatás</text>
+</svg>

@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="470" viewBox="0 0 900 470">
+<style>
+text{font-family:Arial,sans-serif;fill:#26313a;font-size:20px}
+.title{font-size:25px;font-weight:700;fill:#315e73}
+.small{font-size:18px;fill:#52606d}
+.box{fill:#fff;stroke:#78909c;stroke-width:2.4}
+.head{fill:#e8f0f3;stroke:#78909c;stroke-width:2.4}
+.arrow{stroke:#607d8b;stroke-width:2.4;fill:none;marker-end:url(#a)}
+</style>
+<defs><marker id="a" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto"><path d="M0,0 L0,6 L9,3 z" fill="#607d8b"/></marker></defs>
+<rect width="900" height="470" rx="18" fill="#f8fafb"/>
+<rect class="head" x="285" y="45" width="330" height="62" rx="10"/>
+<text class="title" x="450" y="84" text-anchor="middle">House</text>
+<rect class="box" x="285" y="107" width="330" height="175"/>
+<text x="320" y="145">adatok:</text>
+<text class="small" x="345" y="180">x, y</text>
+<text class="small" x="345" y="212">size</text>
+<text class="small" x="345" y="244">wallColor</text>
+<rect class="box" x="285" y="282" width="330" height="105"/>
+<text x="320" y="323">metódus:</text>
+<text class="small" x="345" y="358">display()</text>
+<path class="arrow" d="M615 330 H755"/>
+<text class="small" x="675" y="312">kirajzolás</text>
+<rect class="box" x="755" y="285" width="105" height="90" rx="8"/>
+<polygon points="765,318 807,290 850,318" fill="#596979"/>
+<rect x="772" y="318" width="70" height="48" fill="#d68c68"/>
+<rect x="801" y="338" width="14" height="28" fill="#6a4e3e"/>
+</svg>

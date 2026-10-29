@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="980" height="500" viewBox="0 0 980 500">
+<style>text{font-family:Arial,sans-serif;fill:#252a31;font-size:19px}.head{font-weight:700;fill:#376f82}.cell{fill:#fff;stroke:#cfd7df}.hcell{fill:#e8f0f3;stroke:#aebbc6}.title{font-size:24px;font-weight:700}</style>
+<rect width="980" height="500" rx="18" fill="#f7f9fb"/>
+<text class="title" x="70" y="55">Negáció: !A</text>
+<rect class="hcell" x="70" y="80" width="120" height="48"/><rect class="hcell" x="190" y="80" width="120" height="48"/>
+<text class="head" x="130" y="111" text-anchor="middle">A</text><text class="head" x="250" y="111" text-anchor="middle">!A</text>
+<rect class="cell" x="70" y="128" width="120" height="48"/><rect class="cell" x="190" y="128" width="120" height="48"/>
+<text x="130" y="159" text-anchor="middle">hamis</text><text x="250" y="159" text-anchor="middle">igaz</text>
+<rect class="cell" x="70" y="176" width="120" height="48"/><rect class="cell" x="190" y="176" width="120" height="48"/>
+<text x="130" y="207" text-anchor="middle">igaz</text><text x="250" y="207" text-anchor="middle">hamis</text>
+
+<text class="title" x="380" y="55">ÉS: A &amp;&amp; B</text>
+<rect class="hcell" x="380" y="80" width="90" height="48"/><rect class="hcell" x="470" y="80" width="90" height="48"/><rect class="hcell" x="560" y="80" width="130" height="48"/>
+<text class="head" x="425" y="111" text-anchor="middle">A</text><text class="head" x="515" y="111" text-anchor="middle">B</text><text class="head" x="625" y="111" text-anchor="middle">eredmény</text>
+<rect class="cell" x="380" y="128" width="90" height="48"/><rect class="cell" x="470" y="128" width="90" height="48"/><rect class="cell" x="560" y="128" width="130" height="48"/>
+<text x="425" y="159" text-anchor="middle">hamis</text><text x="515" y="159" text-anchor="middle">hamis</text><text x="625" y="159" text-anchor="middle">hamis</text>
+<rect class="cell" x="380" y="176" width="90" height="48"/><rect class="cell" x="470" y="176" width="90" height="48"/><rect class="cell" x="560" y="176" width="130" height="48"/>
+<text x="425" y="207" text-anchor="middle">hamis</text><text x="515" y="207" text-anchor="middle">igaz</text><text x="625" y="207" text-anchor="middle">hamis</text>
+<rect class="cell" x="380" y="224" width="90" height="48"/><rect class="cell" x="470" y="224" width="90" height="48"/><rect class="cell" x="560" y="224" width="130" height="48"/>
+<text x="425" y="255" text-anchor="middle">igaz</text><text x="515" y="255" text-anchor="middle">hamis</text><text x="625" y="255" text-anchor="middle">hamis</text>
+<rect class="cell" x="380" y="272" width="90" height="48"/><rect class="cell" x="470" y="272" width="90" height="48"/><rect class="cell" x="560" y="272" width="130" height="48"/>
+<text x="425" y="303" text-anchor="middle">igaz</text><text x="515" y="303" text-anchor="middle">igaz</text><text x="625" y="303" text-anchor="middle">igaz</text>
+
+<text class="title" x="720" y="55">VAGY: A || B</text>
+<rect class="hcell" x="720" y="80" width="80" height="48"/><rect class="hcell" x="800" y="80" width="80" height="48"/><rect class="hcell" x="880" y="80" width="80" height="48"/>
+<text class="head" x="760" y="111" text-anchor="middle">A</text><text class="head" x="840" y="111" text-anchor="middle">B</text><text class="head" x="920" y="111" text-anchor="middle">eredmény</text>
+<rect class="cell" x="720" y="128" width="80" height="48"/><rect class="cell" x="800" y="128" width="80" height="48"/><rect class="cell" x="880" y="128" width="80" height="48"/>
+<text x="760" y="159" text-anchor="middle">hamis</text><text x="840" y="159" text-anchor="middle">hamis</text><text x="920" y="159" text-anchor="middle">hamis</text>
+<rect class="cell" x="720" y="176" width="80" height="48"/><rect class="cell" x="800" y="176" width="80" height="48"/><rect class="cell" x="880" y="176" width="80" height="48"/>
+<text x="760" y="207" text-anchor="middle">hamis</text><text x="840" y="207" text-anchor="middle">igaz</text><text x="920" y="207" text-anchor="middle">igaz</text>
+<rect class="cell" x="720" y="224" width="80" height="48"/><rect class="cell" x="800" y="224" width="80" height="48"/><rect class="cell" x="880" y="224" width="80" height="48"/>
+<text x="760" y="255" text-anchor="middle">igaz</text><text x="840" y="255" text-anchor="middle">hamis</text><text x="920" y="255" text-anchor="middle">igaz</text>
+<rect class="cell" x="720" y="272" width="80" height="48"/><rect class="cell" x="800" y="272" width="80" height="48"/><rect class="cell" x="880" y="272" width="80" height="48"/>
+<text x="760" y="303" text-anchor="middle">igaz</text><text x="840" y="303" text-anchor="middle">igaz</text><text x="920" y="303" text-anchor="middle">igaz</text>
+<text x="70" y="405">ÉS esetén mindkét feltételnek igaznak kell lennie.</text>
+<text x="70" y="440">VAGY esetén elegendő, ha legalább az egyik feltétel igaz.</text>
+<text x="70" y="475">A negáció megfordítja a logikai értéket.</text>
+</svg>

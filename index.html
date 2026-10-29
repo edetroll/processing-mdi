@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="hu" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interaktív programozás I – Processing">
+  <title>Interaktív programozás I – Processing</title>
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar" aria-label="Témakörök">
+      <div class="brand">
+        <a class="brand-link" href="#/01-ablak-grafikus-primitivak" aria-label="Kezdőlap">
+          <span class="brand-kicker">Interaktív programozás I</span>
+          <span class="brand-title">Processing</span>
+        </a>
+        <button class="sidebar-close" id="sidebarClose" type="button" aria-label="Oldalsáv bezárása">×</button>
+      </div>
+
+      <nav class="chapter-nav" id="chapterNav"></nav>
+
+      <div class="sidebar-footer">
+        <span>Eszterházy Károly Katolikus Egyetem</span>
+      </div>
+    </aside>
+
+    <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+    <main class="main-panel">
+      <header class="topbar">
+        <button class="icon-button menu-button" id="menuButton" type="button"
+                aria-label="Oldalsáv megjelenítése vagy elrejtése"
+                title="Oldalsáv megjelenítése vagy elrejtése">☰</button>
+
+        <div class="topbar-title">Interaktív programozás I</div>
+
+        <div class="topbar-actions">
+          <button class="icon-button" id="themeToggle" type="button"
+                  aria-label="Világos vagy sötét mód váltása"
+                  title="Világos vagy sötét mód">◐</button>
+        </div>
+      </header>
+
+      <article class="content" id="content" aria-live="polite">
+        <div class="loading-state">A tartalom betöltése…</div>
+      </article>
+
+      <nav class="chapter-pager" id="chapterPager" aria-label="Fejezetek közötti navigáció"></nav>
+    </main>
+  </div>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true">
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Kép bezárása">×</button>
+    <figure class="lightbox-inner">
+      <img id="lightboxImage" alt="">
+      <figcaption id="lightboxCaption"></figcaption>
+    </figure>
+  </div>
+
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
