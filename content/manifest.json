@@ -65,7 +65,25 @@
       "group": "Témakörök",
       "title": "Képek beolvasása és módosítása",
       "description": "Képbetöltés, szűrők, raszterpontok, fotómozaik színillesztéssel és képrészletek átrendezése.",
-      "file": "content/chapters/07-kepek-beolvasasa-modositasa/index.md",
+      "file": "content/chapters/07-kepek-beolvasasa-modositasa/index.md"
+    },
+    {
+      "id": "08-geometriai-transzformaciok",
+      "order": 8,
+      "navNumber": "08",
+      "group": "Témakörök",
+      "title": "Geometriai transzformációk",
+      "description": "Eltolás, forgatás, méretezés, koordinátarendszer mentése és hierarchikus kompozíciók.",
+      "file": "content/chapters/08-geometriai-transzformaciok/index.md"
+    },
+    {
+      "id": "09-terbeli-grafika",
+      "order": 9,
+      "navNumber": "09",
+      "group": "Témakörök",
+      "title": "Térbeli grafika (3D)",
+      "description": "P3D, térbeli alakzatok, kamera, fények, OBJ-import és összetett 3D kompozíciók.",
+      "file": "content/chapters/09-terbeli-grafika/index.md",
       "hideNext": true
     }
   ]
