@@ -5,6 +5,16 @@
   },
   "chapters": [
     {
+      "id": "00-generativ-muveszet",
+      "order": 0,
+      "navNumber": "00",
+      "group": "Bevezetés",
+      "title": "Generatív művészet",
+      "description": "A generatív művészet kialakulása, alkotói, szabályrendszerei, a tudatosan használt véletlen és alkalmazott eszközök.",
+      "file": "content/chapters/00-generativ-muveszet/index.md",
+      "hidePrevious": true
+    },
+    {
       "id": "01-ablak-grafikus-primitivak",
       "order": 1,
       "navNumber": "01",
