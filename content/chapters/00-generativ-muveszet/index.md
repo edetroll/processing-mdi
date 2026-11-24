@@ -1,76 +1,69 @@
 # Generatív művészet
 
-A generatív művészetben az alkotó nem feltétlenül határozza meg közvetlenül a mű minden egyes részletét. Ehelyett **szabályokat és eljárásokat** fogalmaz meg, amelyek meghatározzák, hogy milyen elemek jelenhetnek meg, hogyan kapcsolódhatnak egymáshoz, illetve milyen változások történhetnek. Az így létrehozott rendszer önállóan is előállíthat egy vagy több eredményt.
+A generatív művészet olyan alkotói gyakorlat, amelyben a mű létrehozásában egy előre meghatározott eljárás vagy rendszer is szerepet kap. A rendszer lehet szabályok leírása, számítógépes program, mechanikus szerkezet vagy természetes folyamat. A művész feladata ilyenkor nem minden részlet közvetlen megrajzolása: a létrehozás feltételeit és a rendszer működését határozza meg. Philip Galanter művészetelméleti meghatározása ennek a részben önálló alkotási folyamatnak a szerepét hangsúlyozza; a [MoMA fogalomtára](https://www.moma.org/collection/terms/generative-art) szintén az autonóm rendszerre, illetve a számítógépes kód lehetséges használatára helyezi a hangsúlyt. [Galanter: *What is Generative Art?* (2003)](https://www.generativeart.com/on/cic/papersGA2003/a22.htm)
 
-A generatív művészet nem azonos a számítógépes művészettel: a szabályrendszer végrehajtható kézzel, mechanikus eszközzel vagy természetes folyamat segítségével is. A számítógép azért vált különösen fontos eszközzé, mert nagy mennyiségű műveletet képes pontosan és gyorsan megismételni, miközben a paramétereket is változtathatja. A [Museum of Modern Art](https://www.moma.org/collection/terms/generative-art) meghatározása az autonóm rendszerek és a véletlen szerepét, a [Whitney Museum](https://whitney.org/exhibitions/programmed/art?section=2) értelmezése pedig a művész által létrehozott szabályrendszernek átadott részleges irányítást emeli ki.
+A generatív művészet tehát nem azonos a számítógéppel előállított képek összességével. A módszer számítógép nélkül is alkalmazható, ahogyan a számítógép is használható olyan képalkotási feladatra, amelyben minden részletet közvetlenül az alkotó jelöl ki. Az algoritmikus eljárás jelentősége abban áll, hogy a szerkesztési szabályok következetesen alkalmazhatók, ismételhetők és paraméterekkel módosíthatók.
 
-## A szabályrendszer szerepe {#szabalyok}
+## Szerkesztési szabályok és változatok {#szabalyok}
 
-A generatív eljárás alapja egy **megfogalmazható szerkesztési elv**. Például négyzeteket helyezünk el egy szabályos rácsban, majd az egyes négyzetek helyét és elforgatását bizonyos feltételek mellett módosítjuk. Egy ilyen program sok különböző képet készíthet úgy, hogy közben a szerkesztési alapelv változatlan marad.
+Az algoritmikus képalkotás kiindulópontja rendszerint egy viszonylag egyszerű szerkesztési feladat. Egy geometrikus kompozícióban meghatározhatjuk az alkalmazott alakzatokat, a köztük lévő távolságot, az ismétlés rendjét és a megengedett eltéréseket. Ezek egy része állandó maradhat, mások értéke rajzonként vagy akár elemenként is változhat. Ugyanabból az alapstruktúrából ezért több különböző kompozíció keletkezhet.
 
-![Saját szemléltető ábra: ugyanaz a négyzetrács különböző mértékű eltolásokkal és forgatásokkal](media/szabaly-es-valtozatok.webp)
+![Saját szemléltető grafika: három négyzetrács eltérő mértékű helyzeti és szögeltérésekkel](media/szabalyozott-eltérés.webp)
 
-A szabály meghatározhatja például az alakzatok típusát, számát és méretét, az elhelyezésük módját, a színek kiválasztását, az ismétlések számát, illetve az egyes elemek közötti kapcsolatokat. Az alkotó dönt arról is, **mely jellemzők maradjanak állandók, és melyek változhassanak**.
+A három változat ugyanazt a négyzetrácsot használja. A különbséget nem az alakzatok típusa vagy száma, hanem a megengedett eltolás és forgatás mértéke adja. A paraméterek módosítása így nem pusztán díszítő lehetőség, hanem a kompozíció szerkezetét meghatározó döntés.
 
-### A véletlen tudatos használata
+A véletlen alkalmazása ehhez további változatosságot adhat. Fontos azonban megkülönböztetni a véletlen értéket **a véletlen felhasználásának szabályától**. Az alkotó meghatározhatja például, hogy egy négyzet legfeljebb mekkora szögben fordulhat el, az eltérés milyen irányban történhet, illetve mekkora valószínűséggel marad el. A véletlen tehát a megadott korlátok között működik, és nem minden elemre szükségszerűen azonos módon hat.
 
-A véletlen nem feltétlenül a szabályok hiányát jelenti. Egy rendszerben pontosan meghatározhatjuk, hogy mi változhat véletlenszerűen, milyen tartományban, és milyen valószínűséggel. Egy négyzetrácsban például megengedhetjük az elemek elforgatását, miközben a méretük változatlan marad. Egy másik esetben a forgatás mértéke a kép egyik szélétől a másikig fokozatosan növekedhet.
+A számítógépes programok ehhez rendszerint pszeudovéletlen számokat használnak. Ugyanabból a kezdőértékből (*seed*) azonos véletlenszám-sorozat állítható elő, ezért a kísérletek megismételhetők. Ez különösen akkor hasznos, ha két kép között egyetlen paraméter hatását szeretnénk vizsgálni. Az elkészült változatok kiválasztása, egymáshoz viszonyítása és szükség szerinti további módosítása továbbra is az alkotói folyamat része.
 
-A számítógépes példákban többnyire *pszeudovéletlen* számokat használunk. Ezek egy meghatározott eljárás eredményei; azonos kezdőérték, azaz *seed* mellett a véletlenszám-sorozat megismételhető. Ez különösen hasznos, ha két kompozíció között csak egyetlen szabály hatását szeretnénk összehasonlítani.
+## Történeti áttekintés {#tortenet}
 
-**Az alkotói döntés nem ér véget a program megírásával.** A létrejött változatok megvizsgálhatók, a paraméterek módosíthatók, és az alkotó kiválaszthatja a megfelelő eredményeket. Az algoritmus így nem egyszerűen helyettesíti az alkotót, hanem egy általa meghatározott alkotási folyamat része.
+A szabályokon és ismétlésen alapuló képalkotásnak a digitális korszak előtti előzményei is vannak. A geometrikus absztrakció, a kombinatorikus eljárások és a véletlent alkalmazó kísérletek különböző művészeti irányzatokban jelentek meg. A konceptuális művészetben különösen hangsúlyossá vált az a lehetőség, hogy az alkotás szöveges utasítások alapján, az alkotótól eltérő személy közreműködésével is megvalósítható. A generatív művészet története ezért nem kizárólag a számítógép történeteként írható le.
 
-![Saját szemléltető ábra: a generatív alkotási folyamat főbb elemei](media/alkotoi-folyamat.webp)
+A számítógéppel vezérelt rajzolás az 1960-as években vált a képzőművészeti kísérletezés egyik eszközévé. A korabeli rendszerek számítással határozták meg a pontok és vonalak koordinátáit, amelyeket gyakran tollas rajzgépek, úgynevezett *plotterek* vittek papírra. A médium korlátai – különösen a vonalrajz és a számítási kapacitás – a művek formavilágára is hatással voltak. Az 1968-as londoni *Cybernetic Serendipity* kiállítás a művészet, a számítás és a kibernetika kapcsolatának meghatározó korai eseménye volt. [V&A: *Digital Art*](https://www.vam.ac.uk/articles/digital-art)
 
-## Az algoritmikus művészet kialakulása {#tortenet}
-
-A szabályokon alapuló alkotásnak vannak a számítógépek elterjedése előtti előzményei is. A geometrikus absztrakció, a kombinatorikus szerkesztés és a véletlent használó művészeti kísérletek egyaránt fontosak ebből a szempontból. A hatvanas évek konceptuális művészetében különösen hangsúlyossá vált az elképzelés, hogy egy alkotás részletes utasítások alapján, akár mások közreműködésével is létrejöhet.
-
-A számítógépes grafikai kísérletek az **1960-as években** jelentek meg a képzőművészetben. Georg Nees, Frieder Nake és A. Michael Noll korai munkáiban algoritmusok vezéreltek rajzgépeket (*plottereket*), amelyek tollal vitték papírra a kiszámított vonalakat. A korabeli számítógépek megjelenítési lehetőségei korlátozottak voltak, a szabályok változtatása viszont új képsorozatok létrehozását tette lehetővé. Az 1968-as londoni *Cybernetic Serendipity* kiállítás a számítógép, a kibernetika és az alkotás kapcsolatának egyik fontos korai bemutatkozása volt. [V&A – Digital Art](https://www.vam.ac.uk/articles/digital-art), [V&A – Chance and Control](https://www.vam.ac.uk/exhibitions/chance-and-control-art-in-the-age-of-computers).
-
-A következő évtizedekben az algoritmikus alkotás kiterjedt a mozgóképre, az interaktív installációkra, a térbeli megjelenítésre és a hangra is. A programozás mellett mechanikus rendszerek, érzékelők és külső adatok is lehetnek egy generatív rendszer részei. Napjainkban a generatív művészet fogalma különféle digitális és nem digitális eljárásokat is magában foglal.
+A hetvenes évektől a generatív eljárások egyre változatosabb médiumokban jelentek meg, köztük számítógépes animációban, interaktív rendszerekben és térbeli munkákban. A digitális eszközök fejlődése nem változtatta meg az alapvető alkotói kérdést: milyen szabályokból milyen képi lehetőségek következnek, és ezek közül melyeket tekintjük az adott mű releváns megvalósulásának?
 
 ## Alkotók és művek {#alkotok}
 
-Az alábbi alkotások különböző módon használják a szabályokat, az ismétlést, a számításokat vagy a véletlent. A művek képei a megjelölt külső gyűjteményekből töltődnek be; a hivatkozásokon az eredeti műleírások is megnyithatók. A képek nem a jelen tananyag számára készített újraalkotások.
+A következő alkotók munkái eltérő módon mutatják meg a szerkesztési szabályok, a számítógépes eljárások és az alkotói döntések kapcsolatát. A reprodukciók mellett az eredeti gyűjteményi vagy alkotói oldalak is szerepelnek, ahol a művek további adatai megtekinthetők.
 
-**Sol LeWitt – Wall Drawing #289 (1976).** LeWitt falrajzai olyan utasításokon alapulnak, amelyeket az alkotó nem feltétlenül saját maga hajt végre. Az elkészült mű elhelyezése és részletei az adott helyszínhez, valamint az utasítások értelmezéséhez is kapcsolódnak. A módszer jól mutatja, hogy generatív rendszer **számítógép nélkül is működhet**. [A mű bemutatása – Whitney Museum](https://whitney.org/education/families/kids-art-challenge/sol-lewitt).
+**Sol LeWitt – *Wall Drawing #289* (1976).** LeWitt falrajzainál az utasítások meghatározzák a lehetséges kivitelezést, de a konkrét megvalósítás a helyszíntől és a kivitelezéstől is függhet. A példa azt mutatja, hogy a szabályok alapján létrejövő mű nem igényel feltétlenül számítógépet. [Whitney Museum – LeWitt munkássága](https://whitney.org/education/families/kids-art-challenge/sol-lewitt).
 
-![Sol LeWitt: Wall Drawing #289, 1976. Forrás: Whitney Museum of American Art; fotó: Ron Amstutz, jogok: Sol LeWitt ARS](https://whitneymedia.org/assets/image/822825/WMAA_PROGRAMMED_06_PS_SM.jpg)
+![Sol LeWitt – falrajz, Whitney Museum gyűjteményi reprodukció](https://whitneymedia.org/assets/image/822825/WMAA_PROGRAMMED_06_PS_SM.jpg)
 
-**Georg Nees – Schotter (1968–1970).** A mű szabályos négyzetráccsal indul, majd soronként egyre nagyobb eltolások és forgatások jelennek meg. A fokozatosan növekvő rendezetlenség nem véletlen mellékhatás, hanem a szerkesztési elv része. Ez az egyik legközvetlenebb példa arra, hogyan változik egy kompozíció a véletlen megengedett tartományának módosításával. [Műadatlap – Spalter Digital](https://spalterdigital.com/artworks/953) és [V&A-gyűjtemény](https://collections.vam.ac.uk/item/O221321/schotter-print-nees-georg/).
+**Frieder Nake – *Hommage à Paul Klee Nr. 2* (1965).** Az alkotás a korai számítógépes grafika egyik példája: a vonalak és alakzatok elhelyezését programmal meghatározott szerkesztési eljárás szabályozta. Nake munkái összekapcsolják a geometriai szervezést a számításos változatképzéssel. [ZKM – műadatlap](https://zkm.de/en/artworks/hommage-a-paul-klee-nr-2).
 
-![Georg Nees: Schotter, 1968–1970. Külső reprodukció: billglover.me; mű: Georg Nees](https://billglover.me/2018/08/25/art-in-the-age-of-computers/schotter.jpg)
+![Frieder Nake – Hommage à Paul Klee Nr. 2, ZKM](https://zkm.de/system/files/field_media_image/2024/05/07/002402/ZKM000020997.jpg)
 
-**Frieder Nake – Hommage à Paul Klee Nr. 2 (1965).** Nake különféle vonalakat, alakzatokat és rácsszerkezeteket használt a számítógéppel vezérelt rajzolásban. A mű egyszerre utal Paul Klee festészetére és az algoritmikus képalkotás sajátosságaira: a program részletes szerkesztési szabályokat követ, de azok eltérő eredményeket is lehetővé tesznek. [Műadatlap – ZKM Karlsruhe](https://zkm.de/en/artworks/hommage-a-paul-klee-nr-2).
+**Georg Nees – *Schotter* (1968–1970).** A négyzetrács elemei a kompozíció előrehaladtával egyre nagyobb elmozdulást és forgást kapnak. A mű szerkezete megmarad, miközben a megengedett eltérések növekednek. A fokozatosság és a véletlen kapcsolata a korábbi fejezetek Processing-példáival is könnyen szemléltethető. [V&A – műadatlap](https://collections.vam.ac.uk/item/O221321/schotter-print-nees-georg/).
 
-![Frieder Nake: Hommage à Paul Klee Nr. 2, 1965. Forrás és képi jogok: ZKM Karlsruhe, Frieder Nake](https://zkm.de/system/files/field_media_image/2024/05/07/002402/ZKM000020997.jpg)
+![Georg Nees – Schotter, reprodukció](https://billglover.me/2018/08/25/art-in-the-age-of-computers/schotter.jpg)
 
-**Vera Molnár – Interruptions (1968–1969).** Molnár az ismétlődő geometrikus szerkezetekbe tudatosan bevezetett eltéréseket. Az *Interruptions* sorozatban a vonalak szabályosságát hiányok, megszakítások és véletlenszerű eltérések bontják meg. Munkái különösen szemléletesek a **rend és a megengedett rendezetlenség** kapcsolatának megértéséhez. [Műleírás – Morgan Library & Museum](https://www.themorgan.org/drawings/item/405692), [Digital Art Museum – Interruptions](https://dam.org/museum/artists_ui/artists/molnar-vera/interruptions/).
+**Vera Molnár – *Interruptions* (1968–1969) és *Transzformáció 15.* (1975).** Molnár munkásságában a szabályos geometriai szerkezetek módszeres változtatása központi szerepet kapott. A vonalak megszakítása, az alakzatok elmozdítása vagy a szigorúan meghatározott rend feloldása a kompozíció önálló szerkesztési eszköze. A második mű jól mutatja az egymásba rendezett alakzatok kis mértékű eltolásának és torzításának hatását. [Morgan Library – *Interruptions*](https://www.themorgan.org/drawings/item/405692); [Fővárosi Képtár – *Transzformáció 15.*](https://fovarosikeptar.hu/kiallitasok-2019-ben-templomter/rendetlenseg-a-rendben-vera-molnar-muveszete/).
 
-![Vera Molnár: Interruptions à recouvrements, 1969. Forrás: Wikimedia Commons, CC0 megjelöléssel](https://upload.wikimedia.org/wikipedia/commons/c/c1/Vera_Molnar._Interruptions_%C3%A0_recouvrements%E2%80%9D_from_1969.jpg)
+![Molnár Vera: Transzformáció 15., 1975; a korábban megadott reprodukció](media/molnar-transzformacio-15.jpg)
 
-**Harold Cohen – AARON, például Susan with Plant (1991).** Cohen több évtizeden keresztül fejlesztette az *AARON* nevű képgeneráló rendszerét. A program nem egyszerűen véletlen alakzatokat rajzolt, hanem előre megfogalmazott szabályok segítségével hozott létre figurális kompozíciókat is. Jó példa arra, hogy a generatív eljárás nem korlátozódik geometrikus absztrakcióra. [Harold Cohen: AARON – Whitney Museum](https://whitney.org/exhibitions/harold-cohen-aaron/art?section=2).
+A *Transzformáció 15.* reprodukciója a tananyag saját állományából töltődik be. Az *Interruptions à recouvrements* (1969) további képe a [Wikimedia Commons gyűjteményében](https://commons.wikimedia.org/wiki/File:Vera_Molnar._Interruptions_%C3%A0_recouvrements%E2%80%9D_from_1969.jpg) található.
 
-![Harold Cohen: Susan with Plant, 1991. Forrás és jogok: Whitney Museum of American Art, Harold Cohen Trust](https://whitneymedia.org/assets/image/829949/large_T_2023_210_cropped.jpg)
+**Manfred Mohr – *P-197 J* (1979).** Mohr a kocka geometriai szerkezetéből kiindulva állított elő variációkat. Az élek és kapcsolatok vetítései különböző vonalas konfigurációkat eredményeznek. Az eljárásban ugyanaz az alapszerkezet több különböző formában jelenhet meg. [Mercedes-Benz Art Collection – műadatlap](https://www.mercedes-benz.art/en/artwork/p-197-j-manfred-mohr-1979/); [Digital Art Museum – Mohr munkái](https://dam.org/museum/artists_ui/artists/mohr-manfred/).
 
-Az egyes műveknél nem elsősorban a felhasznált programnyelv a lényeg. A fontosabb kérdés az, **mely részeket határozta meg az alkotó közvetlenül, és melyeket hozta létre a szabályrendszer**.
+![Manfred Mohr – P-197 J, 1979; Mercedes-Benz Art Collection](https://www.mercedes-benz.art/media/Mohr_P-197.jpg)
+
+**John Whitney – *Arabesque* (1975).** Whitney a matematikai összefüggésekre és ismétlődő mozgásokra épülő számítógépes animáció úttörője volt. Az *Arabesque* a geometrikus szerkezetek folyamatos térbeli és időbeli átalakulását hangsúlyozza. Példája megmutatja, hogy a generatív eljárás eredménye nemcsak állókép, hanem mozgókép is lehet. [ACMI – műadatlap és megtekintési lehetőség](https://www.acmi.net.au/works/114089--arabesque/).
+
+**Harold Cohen – *AARON*, például *Susan with Plant* (1991).** Cohen az AARON rendszerét több évtizeden át fejlesztette. A programnak megadott alak-, elhelyezési és rajzolási szabályok segítségével figurális kompozíciók is készülhettek. Munkássága ezért jó ellenpélda arra a feltevésre, hogy az algoritmikus képgenerálás csak absztrakt geometriát eredményezhet. [Whitney Museum – AARON](https://whitney.org/exhibitions/harold-cohen-aaron/art?section=2).
+
+![Harold Cohen – Susan with Plant, 1991; Whitney Museum](https://whitneymedia.org/assets/image/829949/large_T_2023_210_cropped.jpg)
+
+**Casey Reas – *{Software} Structures* (2004).** Reas munkái a művész által megfogalmazott szabályokat és azok szoftveres megvalósításait állítják előtérbe. A projektben három szövegesen leírt szerkezet alapján huszonhat program készült; az eltérő megvalósítások a szabályok értelmezésének szerepét is láthatóvá teszik. A műveket a Whitney Museum online gyűjteménye is bemutatja. [Whitney Museum – *{Software} Structures*](https://whitney.org/exhibitions/software-structures); [Casey Reas – *Process*](https://reas.com/process).
+
+A példák eltérő műfajokból származnak, mégis ugyanazt a kérdést teszik vizsgálhatóvá: mely tulajdonságokat határozza meg közvetlenül az alkotó, és melyek adódnak az eljárás végrehajtásából?
 
 ## Módszerek és eszközök {#eszkozok}
 
-A generatív alkotásokban gyakran ugyanazokkal az alapvető eszközökkel találkozunk, amelyeket a későbbi fejezetekben Processingben is használunk. Az ismétlés sok hasonló elemet állít elő; a feltételek dönthetnek egy elem színéről, helyéről vagy megjelenéséről; a véletlen új változatokat eredményezhet. Az adatokból számított értékek, a zajfüggvények és a geometriai transzformációk összetettebb szerkezeteket tesznek lehetővé.
+Az algoritmikus képalkotás alapműveletei között az ismétlés, a feltételes döntés, a számított koordináták, a véletlen értékek és a geometriai transzformációk szerepelnek. Az ismétlés szabályos vagy módosuló elrendezéseket hozhat létre, a feltételek eltérő megjelenítési szabályokat jelölhetnek ki, míg a véletlen és a zajfüggvények változatosságot vagy összefüggő eltéréseket vezethetnek be. Más munkákban külső adatok, fizikai folyamatok vagy a felhasználó közreműködése is befolyásolhatja az eredményt.
 
-A generatív alkotás nem feltétlenül statikus kép. Ugyanaz a rendszer állíthat elő animációt, interaktív grafikát vagy térbeli jelenetet is. A rajzolás történhet képernyőn, nyomtatott felületen, plotterrel, vetítéssel vagy fizikai eszköz segítségével.
+A képek mellett animációk, interaktív installációk, térbeli jelenetek és fizikai rajzgépekkel készített munkák is használhatnak generatív módszereket. Az egyes eszközök elsősorban abban különböznek, hogy milyen módon lehet megfogalmazni és végrehajtani a szerkesztési eljárásokat. A Processing és a [p5.js](https://p5js.org/) programkóddal, a [TouchDesigner](https://derivative.ca/) többek között vizuális csomópontokkal szervezett, valós idejű rendszerekkel dolgozik; a Python grafikus könyvtárai és a GLSL-shaderek más megvalósítási lehetőségeket kínálnak.
 
-**Néhány elterjedt eszköz:**
-
-- [Processing](https://processing.org/) – vizuális programozási környezet, amelyet ebben a tananyagban használunk.
-- [p5.js](https://p5js.org/) – a Processing szemléletére épülő JavaScript-könyvtár böngészős alkalmazásokhoz.
-- [TouchDesigner](https://derivative.ca/) – csomópontokkal szerkeszthető környezet valós idejű, gyakran interaktív vizuális rendszerekhez.
-- Python és grafikus könyvtárai, valamint GLSL/shaderek – képgenerálásra, adatok vizuális feldolgozására és a grafikus hardver programozására használhatók.
-
-### Generatív művészet és mesterséges intelligencia
-
-A két fogalom nem azonos. Egy hagyományos algoritmikus alkotásnál a művész által megadott, értelmezhető szabályokból indulunk ki. Egy tanított generatív mesterségesintelligencia-modell ezzel szemben nagy adathalmazokból tanult mintázatok alapján is létrehozhat új képeket. A két terület között vannak átfedések, de nem minden generatív alkotás MI-alapú, és nem minden számítógéppel előállított kép generatív művészeti alkotás. Az [AARON története](https://whitney.org/exhibitions/harold-cohen-aaron/art?section=2) különösen jól mutatja, hogy ez a különbség történetileg is összetett.
-
-**A kurzus célja** nem az, hogy a hallgatók minden alkalmazott algoritmust önállóan, részletes matematikai háttérrel tudjanak megtervezni. Arra törekszünk, hogy képesek legyenek felismerni egy alkotás alapvető építőelemeit, megfogalmazni a szerkesztési szabályokat, módosítani a paramétereket, és a létrejött eredményeket értékelni. Később azt is megvizsgáljuk, hogyan lehet egy elképzelt grafikai eljárást egy nyelvi modellel közösen pontosítani és megvalósítani.
+A további fejezetekben a Processing alapvető eszközeit használjuk arra, hogy a hallgatók képesek legyenek egy kompozíció szerkezetét felismerni, a szükséges műveleteket megfogalmazni, majd egy működő megoldás paramétereit tudatosan változtatni. A cél nem egyetlen helyes kép reprodukálása, hanem annak megértése, hogyan jönnek létre az eltérő eredmények ugyanazon eljárás alapján.
