@@ -301,7 +301,7 @@ void draw() {
 ```
 :::
 
-**2. változat – két eltérő alakzatsor.** A kockák alá újabb, kisebb gömböket helyezünk. Mindkét alakzatsor saját ciklusból készül, ezért a darabszámuk és a sugaraik egymástól függetlenül változtathatók.
+**Két különböző alakzatsor.** A korábbi program tizenkét kockát helyezett el egy körgyűrűn. A második változatban ugyanez a ciklus újabb alakzatokat is elhelyez: a kockák alá kisebb gömböket helyezünk. Mindkét alakzatsor saját ciklusból készül, ezért a darabszámuk és a sugaraik egymástól függetlenül változtathatók.
 
 :::processing-example title="Kockák és gömbök két gyűrűben" image="media/10-kompozicio-2.webp"
 ```processing
@@ -340,7 +340,7 @@ void draw() {
 ```
 :::
 
-**3. változat – hierarchikus mozgás.** A gyűrű mellé egy központi gömböt helyezünk, majd egy kisebb gömböt keringetünk körülötte. Ennek újabb holdja van, ezért ismét egymásba ágyazott `pushMatrix()` és `popMatrix()` hívásokat használunk. A 2D bolygó–hold példánál megismert szerkezet tehát térben is ugyanúgy működik.
+**Egymásba ágyazott mozgások.** Az előző programban a kockák és gömbök azonos körpálya mentén jelentek meg. Itt a gyűrű mellé egy központi gömböt helyezünk, majd egy kisebb gömböt keringetünk körülötte. Ennek újabb holdja van, ezért ismét egymásba ágyazott `pushMatrix()` és `popMatrix()` hívásokat használunk. A 2D bolygó–hold példánál megismert szerkezet tehát térben is ugyanúgy működik.
 
 :::processing-example title="Hierarchikus mozgás a térbeli kompozícióban" image="media/11-kompozicio-3.webp"
 ```processing
@@ -376,7 +376,7 @@ void draw() {
 ```
 :::
 
-**4. változat – összetett kompozíció és világítás.** A végső program az ismétlődő alakzatsorokat metódusba szervezi. Két egymástól eltérő számú és sugarú gyűrűt készítünk, majd hozzáadunk egy központi gömböt és egy mozgó, színes pontfényt. A metódus paraméterei határozzák meg a gyűrű méretét, elemszámát és az alakzatok színét.
+**Világítás és összetettebb elrendezés.** Az előző lépésben a hierarchikus transzformációk működését ismertük meg. A végső program az ismétlődő alakzatsorokat metódusba szervezi. Két egymástól eltérő számú és sugarú gyűrűt készítünk, majd hozzáadunk egy központi gömböt és egy mozgó, színes pontfényt. A metódus paraméterei határozzák meg a gyűrű méretét, elemszámát és az alakzatok színét.
 
 :::processing-example title="Mozgó geometrikus térkompozíció" image="media/12-kompozicio-4.webp"
 ```processing

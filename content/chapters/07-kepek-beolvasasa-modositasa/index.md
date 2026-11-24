@@ -334,7 +334,7 @@ A mellékelt [fotómozaik-adatcsomag](media/photomozaik-adatok.zip) tartalmazza 
 
 **1. változat – képek és átlagos színeik.** Elsőként beolvassuk a 25 mintaképet, és mindegyikhez kiszámítunk egy átlagos RGB-színt. Ehhez a képpontok vörös, zöld és kék összetevőit külön-külön összeadjuk, majd elosztjuk a képpontok számával. A mintaképeket és alattuk az átlagos színüket rácsban jelenítjük meg.
 
-:::processing-example title="Fotómozaik – 1. változat: mintaképek" image="media/10-mozaik-konyvtar.webp"
+:::processing-example title="Fotómozaik – mintaképek" image="media/10-mozaik-konyvtar.webp"
 ```processing
 PImage[] tiles = new PImage[25];
 color[] averages = new color[25];
@@ -379,7 +379,7 @@ A `tiles` a 25 képet, az `averages` pedig ezek átlagos színét tárolja. A `n
 
 **2. változat – a célkép területeinek átlagolása.** Korábban egy cella középpontjának színét olvastuk ki. Most az egész 32×32 pixeles terület átlagos színét számítjuk ki. A `get(x, y, w, h)` a képből egy téglalap alakú részletet ad vissza új `PImage` objektumként; ennek átlagát a már megismert metódussal határozzuk meg.
 
-:::processing-example title="Fotómozaik – 2. változat: cellaátlagok" image="media/11-mozaik-atlagok.webp"
+:::processing-example title="Fotómozaik – cellaátlagok" image="media/11-mozaik-atlagok.webp"
 ```processing
 PImage photo;
 
@@ -420,7 +420,7 @@ A cellák átlagolása fontos különbség az egyetlen képpontból történő m
 
 **3. változat – a legmegfelelőbb kis kép kiválasztása.** Most összekapcsoljuk az előző két megoldást. Egy célterület átlagos színét összehasonlítjuk a 25 mintakép átlagos színével. Az RGB-színek különbségét a három színcsatorna eltéréseiből számítjuk. A legkisebb különbséget adó képet rajzoljuk a célterület helyére.
 
-:::processing-example title="Fotómozaik – 3. változat: kész kompozíció" image="media/12-fotomozaik.webp"
+:::processing-example title="Fotómozaik – kész kompozíció" image="media/12-fotomozaik.webp"
 ```processing
 PImage photo;
 PImage[] tiles = new PImage[25];
@@ -501,7 +501,7 @@ A [panelépület mintaképét](media/panelhaz.jpg) vagy a [Processinghez előké
 
 **1. változat – a kiinduló kép.** Először változtatás nélkül beolvassuk és megjelenítjük a képet. A későbbi változatokban mindig ugyanennek az eredeti képnek a részleteit használjuk, ezért az elmozdított részletek nem halmozódnak hibásan az előzőleg módosított képből.
 
-:::processing-example title="PANELPROGRAM – 1. változat: eredeti homlokzat" image="media/13-panel-eredeti.webp"
+:::processing-example title="PANELPROGRAM – eredeti homlokzat" image="media/13-panel-eredeti.webp"
 ```processing
 PImage photo;
 
@@ -515,7 +515,7 @@ void setup() {
 
 **2. változat – vízszintes sávok eltolása.** A fényképet 24 pixel magas vízszintes sávokra bontjuk, majd minden sávot egy véletlen vízszintes eltéréssel rajzolunk ki. Az eltolás a kép egyes részleteit megtöri, miközben az emeletek és ablakok szerkezete még felismerhető marad.
 
-:::processing-example title="PANELPROGRAM – 2. változat: eltolódó sávok" image="media/14-panel-savok.webp"
+:::processing-example title="PANELPROGRAM – eltolódó sávok" image="media/14-panel-savok.webp"
 ```processing
 PImage photo;
 
@@ -542,7 +542,7 @@ A `band` változó egy képrészletet tárol. A `random(-35, 35)` minden ismétl
 
 **3. változat – helyi töredezettség.** Most az egész szélességű sávok helyett kisebb téglalapokat vágunk ki, és másik vízszintes pozícióban rajzoljuk ki őket. A teljes eredeti kép látható marad a háttérben; a hozzáadott részletek miatt az ablakok és erkélyek egy része megismétlődik.
 
-:::processing-example title="PANELPROGRAM – 3. változat: képtöredékek" image="media/15-panel-blokkok.webp"
+:::processing-example title="PANELPROGRAM – képtöredékek" image="media/15-panel-blokkok.webp"
 ```processing
 PImage photo;
 
@@ -574,7 +574,7 @@ A `fragment` minden ismétlésben másik téglalap alakú képrészletet tárol.
 
 **4. változat – időben változó eltolások.** A mozgó változatban az egyes sávokat már a `setup()` metódusban kivágjuk, és egy `PImage[]` tömbben tároljuk. A `draw()` így nem vágja ki minden képkockában újra ugyanazokat a képrészeket, hanem csak azok megjelenítési helyét számítja újra.
 
-:::processing-example title="PANELPROGRAM – 4. változat: animált képsávok" image="media/16-panel-mozgo.webp"
+:::processing-example title="PANELPROGRAM – animált képsávok" image="media/16-panel-mozgo.webp"
 ```processing
 PImage photo;
 PImage[] bands = new PImage[24];

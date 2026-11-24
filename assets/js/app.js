@@ -4,6 +4,7 @@ const state = {
   currentId: null,
   currentSection: null,
   outlines: new Map(),
+  baseFont: Number(localStorage.getItem('processing-font-size')) || 18,
   theme: localStorage.getItem('processing-theme') || null,
   sidebarCollapsed: localStorage.getItem('processing-sidebar-collapsed') === 'true'
 };
@@ -47,6 +48,10 @@ function uniqueSlug(base, used) {
   return slug;
 }
 
+function applyFontSize() {
+  document.documentElement.style.setProperty('--base-font', `${state.baseFont}px`);
+  localStorage.setItem('processing-font-size', state.baseFont);
+}
 
 function preferredTheme() {
   if (state.theme) return state.theme;
@@ -94,6 +99,16 @@ function setupUiControls() {
 
   themeToggle.addEventListener('click', () => {
     applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+  });
+
+  document.getElementById('fontIncrease').addEventListener('click', () => {
+    state.baseFont = Math.min(22, state.baseFont + 1);
+    applyFontSize();
+  });
+
+  document.getElementById('fontDecrease').addEventListener('click', () => {
+    state.baseFont = Math.max(15, state.baseFont - 1);
+    applyFontSize();
   });
 
   lightboxClose.addEventListener('click', closeLightbox);
@@ -364,7 +379,10 @@ function renderCodeBlock(language, code) {
     <div class="code-block">
       <div class="code-toolbar">
         <div class="code-label">${escapeHtml(label)}</div>
-        <button class="copy-code" type="button">Másolás</button>
+        <div class="code-toolbar-actions">
+          <button class="expand-code" type="button" aria-expanded="false" hidden>Kibontás</button>
+          <button class="copy-code" type="button">Másolás</button>
+        </div>
       </div>
       <pre><code data-raw="${escapeHtml(code)}">${highlighted}</code></pre>
     </div>`;
@@ -620,6 +638,20 @@ function setupRenderedContent() {
     });
   });
 
+  // A hosszú programkódok görgethetők; szükség esetén teljesen kibontatók.
+  document.querySelectorAll('.code-block').forEach(block => {
+    const pre = block.querySelector('pre');
+    const button = block.querySelector('.expand-code');
+    if (!pre || !button) return;
+    button.hidden = pre.scrollHeight <= pre.clientHeight + 3;
+    button.addEventListener('click', () => {
+      const open = block.classList.toggle('is-expanded');
+      button.textContent = open ? 'Összecsukás' : 'Kibontás';
+      button.setAttribute('aria-expanded', String(open));
+      if (!open) pre.scrollTop = 0;
+    });
+  });
+
   document.querySelectorAll('.figure img, .processing-example-output img').forEach(img => {
     img.addEventListener('click', () => openLightbox(img));
   });
@@ -722,6 +754,7 @@ async function route() {
 }
 
 async function init() {
+  applyFontSize();
   applyTheme(preferredTheme());
   applySidebarState();
   setupUiControls();

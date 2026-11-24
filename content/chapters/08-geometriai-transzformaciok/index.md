@@ -10,7 +10,7 @@ A három legfontosabb művelet a `translate(x, y)` (eltolás), a `rotate(angle)`
 
 **Eltolás.** Az első négyzetet még a szokásos koordinátákkal rajzoljuk, majd az origót egy másik helyre visszük. A második négyzet már az új `(0, 0)` ponthoz képest készül el.
 
-:::processing-example title="1. Eltolás" image="media/02-eltolas.webp"
+:::processing-example title="Eltolás" image="media/02-eltolas.webp"
 ```processing
 void setup() {
   size(800, 500);
@@ -30,7 +30,7 @@ void setup() {
 
 **Forgatás.** A `rotate()` az aktuális origó körül forgatja el a koordinátarendszert. Ha azt szeretnénk, hogy a négyzet saját középpontja körül forduljon el, előbb az origót a négyzet közepébe helyezzük. A `rectMode(CENTER)` miatt a `(0, 0)` pont a négyzet közepét jelöli.
 
-:::processing-example title="2. Forgatás az aktuális origó körül" image="media/03-forgatas.webp"
+:::processing-example title="Forgatás az aktuális origó körül" image="media/03-forgatas.webp"
 ```processing
 void setup() {
   size(800, 500);
@@ -52,7 +52,7 @@ void setup() {
 
 **Méretezés.** A `scale(1.8)` a koordinátarendszerben mért távolságokat 1,8-szorosukra növeli, így az utána rajzolt négyzet is nagyobb lesz. A `scale(0.5)` ezzel szemben a felére kicsinyít. A méretezés a későbbi koordinátákra is hatással van, nem csak az alakzat méretére.
 
-:::processing-example title="3. Méretezés" image="media/04-meretezes.webp"
+:::processing-example title="Méretezés" image="media/04-meretezes.webp"
 ```processing
 void setup() {
   size(800, 500);
@@ -77,7 +77,7 @@ A transzformációk **egymásra épülnek**. Ha két `translate()` hívás köve
 
 **Mentés nélkül.** Az alábbi programban a második és a harmadik négyzet pozícióját az előzőleg végrehajtott eltolások és forgatások is meghatározzák.
 
-:::processing-example title="4. A transzformációk hatása összeadódik" image="media/05-mentes-nelkul.webp"
+:::processing-example title="Egymás után alkalmazott transzformációk" image="media/05-mentes-nelkul.webp"
 ```processing
 void setup() {
   size(800, 500);
@@ -104,7 +104,7 @@ void setup() {
 
 **Mentéssel.** A `pushMatrix()` megjegyzi az aktuális koordinátarendszert, a `popMatrix()` pedig visszaállítja. A két utasítás között módosíthatjuk a rajzolás helyét és irányát; az alakzat után visszatérünk a korábbi állapothoz.
 
-:::processing-example title="5. Független alakzatok mentett koordinátarendszerrel" image="media/06-mentessel.webp"
+:::processing-example title="Független alakzatok a mentett koordinátarendszerben" image="media/06-mentessel.webp"
 ```processing
 void setup() {
   size(800, 500);
@@ -164,7 +164,7 @@ void setup() {
 
 **A műveletek sorrendje is számít.** A következő programban mindkét négyzetnél ugyanazt az eltolást és forgatást használjuk. A bal oldali alakzatnál előbb az x tengely mentén tolunk el, majd elforgatunk; a jobb oldalinál már az elforgatott x tengely mentén végzünk eltolást.
 
-:::processing-example title="6. Eltolás és forgatás felcserélése" image="media/07-sorrend.webp"
+:::processing-example title="Eltolás és forgatás sorrendje" image="media/07-sorrend.webp"
 ```processing
 void setup() {
   size(800, 500);
@@ -197,7 +197,7 @@ A `draw()` minden új képkockánál alaphelyzetbe állítja a transzformációs
 
 Azonos alakzatokkal is létrehozhatunk összetett mintát, ha mindig ugyanahhoz a középponthoz képest más szögben helyezzük el őket. A ciklusban kiszámított szöget használjuk a forgatáshoz; a `pushMatrix()` és a `popMatrix()` minden négyzetet önállóan kezel.
 
-:::processing-example title="7. Négyzetekből kirajzolt rozetta" image="media/08-rozetta.webp"
+:::processing-example title="Négyzetekből kirajzolt rozetta" image="media/08-rozetta.webp"
 ```processing
 void setup() {
   size(800, 500);

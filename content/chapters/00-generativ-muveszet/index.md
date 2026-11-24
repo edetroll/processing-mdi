@@ -8,7 +8,7 @@ A generatív művészet tehát nem azonos a számítógéppel előállított ké
 
 Az algoritmikus képalkotás kiindulópontja rendszerint egy viszonylag egyszerű szerkesztési feladat. Egy geometrikus kompozícióban meghatározhatjuk az alkalmazott alakzatokat, a köztük lévő távolságot, az ismétlés rendjét és a megengedett eltéréseket. Ezek egy része állandó maradhat, mások értéke rajzonként vagy akár elemenként is változhat. Ugyanabból az alapstruktúrából ezért több különböző kompozíció keletkezhet.
 
-![Saját szemléltető grafika: három négyzetrács eltérő mértékű helyzeti és szögeltérésekkel](media/szabalyozott-eltérés.webp)
+![A szerkesztési eltérések hatása ugyanarra a négyzetrácsra](media/szabalyozott-eltérés.webp)
 
 A három változat ugyanazt a négyzetrácsot használja. A különbséget nem az alakzatok típusa vagy száma, hanem a megengedett eltolás és forgatás mértéke adja. A paraméterek módosítása így nem pusztán díszítő lehetőség, hanem a kompozíció szerkezetét meghatározó döntés.
 

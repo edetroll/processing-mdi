@@ -1,7 +1,5 @@
 # Ablak és grafikus primitívek
 
-**A Processing telepítése.** A Processing ingyenesen letölthető a [Processing hivatalos letöltési oldaláról](https://processing.org/download/). A letöltési oldalon Windows, macOS és Linux rendszerhez is elérhető a megfelelő változat. A telepítés után a Processing Development Environment (PDE) felületén hozzuk létre és futtatjuk a példaprogramokat.
-
 ## Hogyan épül fel egy Processing-program? {#program-felepitese}
 
 A Processingben elkészített programot **sketchnek** nevezzük. Egy sketchben később sokféle utasítás szerepelhet, de az első programjainknál két kitüntetett részre érdemes figyelnünk: a `setup()` és a `draw()` metódusra.
@@ -246,7 +244,7 @@ A Processing hivatalos **Easing** példájának alapötlete az, hogy egy kör k�
 
 Először induljunk ki abból a változatból, amelyet már ismerünk: a kör közvetlenül az egér koordinátáira kerül.
 
-:::processing-example title="1. lépés – közvetlen követés" image="media/eger-kovetes.webp"
+:::processing-example title="Közvetlen egérkövetés" image="media/eger-kovetes.webp"
 ```processing
 void setup() {
   size(640, 360);
@@ -270,7 +268,7 @@ A lágyításhoz már nem rajzolhatjuk a kört közvetlenül a `mouseX` és `mou
 4. A következő képkockában ugyanezt újra elvégezzük.
 :::
 
-:::processing-example title="2. lépés – lágy követés" image="media/easing.webp"
+:::processing-example title="Lágyított egérkövetés" image="media/easing.webp"
 ```processing
 float x = 0;
 float y = 0;
@@ -310,7 +308,7 @@ A `map()` egy értéket az egyik tartományból egy másik tartományba képez �
 
 A `map(mouseX, 0, width, 40, height)` kifejezés tehát azt jelenti: **vedd az egér vízszintes koordinátáját, és számíts hozzá arányosan egy 40 és az ablak magassága közötti értéket.**
 
-:::processing-example title="1. lépés – az egér szabályozza a méretet" image="media/mouse1d-egy-negyzet.webp"
+:::processing-example title="Méretváltozás az egér helyzetével" image="media/mouse1d-egy-negyzet.webp"
 ```processing
 void setup() {
   size(640, 360);
@@ -331,7 +329,7 @@ void draw() {
 
 A következő változatban két négyzetet készítünk. Amikor az egyik nagyobb lesz, a másik kisebb. Az `r1` értékét az egérből számítjuk ki, az `r2` pedig az ablak magasságából még „megmaradó” rész lesz. A kitöltés fényerejét is ugyanebből a két értékből számítjuk.
 
-:::processing-example title="2. lépés – két egymást kiegészítő négyzet" image="media/mouse1d.webp"
+:::processing-example title="Egymást kiegészítő méretváltozások" image="media/mouse1d.webp"
 ```processing
 void setup() {
   size(640, 360);
@@ -365,7 +363,7 @@ A **Mouse 2D** példában már az egér mindkét koordinátáját használjuk. A
 
 Első lépésként rajzoljunk csak egyetlen négyzetet. A `mouseX` közvetlenül a négyzet vízszintes helye lesz. A `mouseY` értékéből a négyzet méretét számítjuk ki.
 
-:::processing-example title="1. lépés – két egérkoordináta, kétféle hatás" image="media/mouse2d-egy-negyzet.webp"
+:::processing-example title="Két egérkoordináta különböző hatással" image="media/mouse2d-egy-negyzet.webp"
 ```processing
 void setup() {
   size(640, 360);
@@ -386,7 +384,7 @@ void draw() {
 
 Most készítsünk egy második négyzetet is, amely az elsővel ellentétesen mozog és változik. Ehhez kiszámítjuk az egér koordinátáinak „fordított” értékét. Ha például az egér az ablak bal oldalához közel van, akkor a `width - mouseX` érték a jobb oldalhoz lesz közel.
 
-:::processing-example title="2. lépés – tükrözött második négyzet" image="media/mouse2d.webp"
+:::processing-example title="Tükrözött négyzetpár" image="media/mouse2d.webp"
 ```processing
 void setup() {
   size(640, 360);

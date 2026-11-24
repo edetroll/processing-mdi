@@ -78,6 +78,8 @@ A program a `getRowCount()` segítségével határozza meg a sorok számát. A `
 
 Ugyanaz a mérési sor különböző ábrázolásokkal eltérő kérdések megválaszolására alkalmas. Az idősor a változás irányát, a hőtérkép a hónapok közötti eltéréseket mutatja. A színskálát és a tengelyek jelentését ezért tudatosan kell megválasztani.
 
+Az oszlopdiagram az egyes évek értékeit egymástól elkülönítve mutatja. A következő program **ugyanazt az `avg` oszlopot** használja, de az értékeket pontokkal jelöli és vonallal köti össze. Ez az ábrázolás az időbeli változás irányát jobban hangsúlyozza; az adatok nem változnak.
+
 :::processing-example title="Éves eltérések vonaldiagramon" image="media/03-vonaldiagram.webp"
 ```processing
 Table data;
@@ -126,6 +128,8 @@ void setup() {
 :::
 
 A pontokat a `vertex()` segítségével egy vonallá kapcsoljuk össze. A második ciklus külön megrajzolja az egyes éveket jelölő pontokat. Az idősorban a vízszintes tengely az évet, a függőleges tengely a hőmérsékleti eltérést jelenti. Egy végleges statisztikai ábrán a tengelyfeliratoknak és a jelmagyarázatnak is szerepelnie kell.
+
+A hőtérképnél most a 12 havi értéket is felhasználjuk, nem csak az éves átlagot. Két egymásba ágyazott ciklus az év és a hónap alapján választ ki egy CSV-cellát, a `tempColor()` pedig színné alakítja az értéket. Itt a cellák helye és színe hordozza az információt, nem a téglalapok hossza.
 
 :::processing-example title="Havi eltérések hőtérképen" image="media/04-hotermekep.webp"
 ```processing
@@ -188,6 +192,8 @@ A képletekből számított felületeknél az előző fejezetben a `heightAt(x, 
 
 A felület itt **nem a Föld felszínét** és nem földrajzi magasságot ábrázol. Egy év–hónap–eltérés adatmátrix háromdimenziós megjelenítése. A sorok és oszlopok közötti interpolált felület az ábra része, nem új mérési eredmény.
 
+A korábbi hőtérkép már egy kétdimenziós adatmátrixot jelenített meg: év × hónap. Most a rács méretei és az adatok azonosak maradnak, de a cella színén kívül a `z` koordináta is a hőmérsékleti eltérésből számítódik. A `QUAD_STRIP` egymás melletti adatsorokból készít felületet. A 3D-s nézet nem helyettesíti a pontosabb 2D-s leolvasást.
+
 :::processing-example title="Havi hőmérsékleti adatok térbeli felületként" image="media/05-adatfelulet.webp"
 ```processing
 Table data;
@@ -244,7 +250,7 @@ A második példa nem szabályos felületet, hanem sok **önálló adatpontot** 
 
 A mellékelt `foldrengesek-minta.csv` **mesterséges, oktatási célra előállított adatokat tartalmaz**. Nem USGS-mérések, és belőlük földtudományi következtetés nem vonható le. A programot ezen a kis fájlon lehet azonnal kipróbálni, majd a [USGS hivatalos CSV-letöltéséből](https://earthquake.usgs.gov/earthquakes/feed/v1.0/csv.php) származó adatokkal is meg lehet tölteni. Ehhez a `latitude`, `longitude`, `depth` és `mag` mezőket az alábbi kódban használt oszlopnevekhez kell igazítani. A USGS eseménylistájának keresési feltételeit (időszak, terület, minimum magnitúdó) az ábrázolás mellett dokumentálni kell.
 
-:::processing-example title="Földrengések 1. – epicentrumok síkbeli elhelyezkedése" image="media/06-rengesek-2d.webp"
+:::processing-example title="Földrengések – epicentrumok síkbeli elhelyezkedése" image="media/06-rengesek-2d.webp"
 ```processing
 Table data;
 
@@ -286,7 +292,9 @@ void setup() {
 
 A `map()` itt egy egyszerű, **ekvirektanguláris** koordináta-ábrázolást valósít meg: a földrajzi hosszúság vízszintes, a szélesség függőleges irányban jelenik meg. Ez szemléltetési célra használható, de a pólusok felé jelentős terület- és távolságtorzítás lép fel. A körátmérőt itt a magnitúdóhoz rendeljük; a magnitúdó logaritmikus jellegű földrengésméret-mérőszám, ezért a kör mérete nem olvasható közvetlenül energiaarányként.
 
-:::processing-example title="Földrengések 2. – pontok három koordinátával" image="media/07-rengesek-3d.webp"
+**A mélység megjelenítése.** A síkbeli ábrázolásból a földrengések földrajzi elhelyezkedését láttuk. A térbeli változat megőrzi a hosszúsági és szélességi koordináták szerepét, de a `depth` oszlopból számított harmadik koordinátát is megjeleníti. A programban alkalmazott magassági szorzó csak vizuális kiemelés; a földrengés valós mélységét továbbra is a CSV számértéke adja meg.
+
+:::processing-example title="Földrengések – pontok három koordinátával" image="media/07-rengesek-3d.webp"
 ```processing
 Table data;
 

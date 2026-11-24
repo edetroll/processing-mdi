@@ -1,6 +1,7 @@
 :root {
-  --sidebar-width: clamp(16rem, 22vw, 18.75rem);
-  --page-max: 70rem;
+  --sidebar-width: 300px;
+  --page-max: 1120px;
+  --base-font: 18px;
 
   --bg: #f3f5f7;
   --surface: #ffffff;
@@ -37,7 +38,7 @@
 
   --shadow: 0 10px 28px rgba(25, 35, 48, .07);
   --radius: 14px;
-  --topbar-height: 3.875rem;
+  --topbar-height: 62px;
 }
 
 html[data-theme="dark"] {
@@ -80,7 +81,7 @@ html[data-theme="dark"] {
 
 html {
   scroll-behavior: smooth;
-  font-size: clamp(16px, calc(15px + 0.22vw), 18px);
+  font-size: var(--base-font);
 }
 
 body {
@@ -101,7 +102,6 @@ button { color: inherit; }
   position: fixed;
   inset: 0 auto 0 0;
   width: var(--sidebar-width);
-  max-width: 88vw;
   display: flex;
   flex-direction: column;
   background: var(--sidebar-bg);
@@ -282,7 +282,7 @@ body.sidebar-collapsed .main-panel {
   display: flex;
   align-items: center;
   gap: 13px;
-  padding: 0 clamp(.7rem, 2vw, 1.375rem);
+  padding: 0 22px;
   background: color-mix(in srgb, var(--surface) 93%, transparent);
   backdrop-filter: blur(12px);
   border-bottom: 1px solid var(--border);
@@ -309,8 +309,8 @@ body.sidebar-collapsed .main-panel {
   border: 1px solid var(--border);
   background: var(--surface);
   border-radius: 8px;
-  min-width: 2.5rem;
-  height: 2.375rem;
+  min-width: 40px;
+  height: 38px;
   padding: 0 10px;
   cursor: pointer;
   transition: background .15s ease, border-color .15s ease;
@@ -328,7 +328,7 @@ body.sidebar-collapsed .main-panel {
 }
 
 .content {
-  width: min(var(--page-max), calc(100% - clamp(1.75rem, 6vw, 4rem)));
+  width: min(var(--page-max), calc(100% - 64px));
   margin: 0 auto;
   padding: 58px 0 34px;
 }
@@ -576,7 +576,7 @@ pre code {
 }
 
 .chapter-pager {
-  width: min(var(--page-max), calc(100% - clamp(1.75rem, 6vw, 4rem)));
+  width: min(var(--page-max), calc(100% - 64px));
   margin: 18px auto 0;
   padding: 28px 0 60px;
   display: grid;
@@ -716,6 +716,8 @@ pre code {
 }
 
 @media (max-width: 720px) {
+  :root { --base-font: 17px; }
+
   .topbar {
     padding: 0 11px;
   }
@@ -726,7 +728,7 @@ pre code {
 
   .content,
   .chapter-pager {
-    width: min(calc(100% - 1.5rem), var(--page-max));
+    width: min(100% - 28px, var(--page-max));
   }
 
   .content {
@@ -818,4 +820,61 @@ pre code {
 .description-block ul {
   margin: .55rem 0 .15rem;
   padding-left: 1.35rem;
+}
+
+
+/* Kódpéldák egységes kezelése. A másolás és kibontás vezérlője mindig látható. */
+:root { --code-max-height: 420px; }
+.code-block pre {
+  max-height: min(var(--code-max-height), 63vh);
+  overflow-x: auto;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  scrollbar-color: var(--muted) var(--code-bg);
+}
+.code-block pre::-webkit-scrollbar { width: 9px; height: 9px; }
+.code-block pre::-webkit-scrollbar-track { background: var(--code-bg); }
+.code-block pre::-webkit-scrollbar-thumb {
+  background: var(--muted);
+  border: 2px solid var(--code-bg);
+  border-radius: 6px;
+}
+.code-block pre::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+.code-block.is-expanded pre { max-height: none; }
+.code-toolbar-actions { display: flex; gap: 7px; align-items: center; }
+.expand-code {
+  border: 1px solid var(--code-border);
+  background: var(--surface);
+  color: var(--text);
+  padding: 4px 9px;
+  border-radius: 6px;
+  font-size: .68rem;
+  cursor: pointer;
+}
+.expand-code:hover, .expand-code:focus-visible { background: var(--surface-soft); }
+.expand-code[hidden] { display: none !important; }
+/* A hosszú programok nem növelik meg aránytalanul a magyarázat és a kimenet magasságát. */
+.processing-example-grid { align-items: stretch; }
+.processing-example-output { align-self: stretch; }
+@media (max-width: 780px) {
+  :root { --code-max-height: 360px; }
+  .code-block pre { max-height: min(var(--code-max-height), 54vh); }
+}
+@media print {
+  .code-block pre { max-height: none !important; overflow: visible !important; }
+  .expand-code { display: none !important; }
+}
+
+/* Kibontáskor a teljes kód egy oszlopban olvasható; az eredmény alá kerül. */
+@supports selector(:has(*)) {
+  .processing-example:has(.code-block.is-expanded) .processing-example-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .processing-example:has(.code-block.is-expanded) .processing-example-code {
+    border-right: 0;
+  }
+  .processing-example:has(.code-block.is-expanded) .processing-example-output {
+    border-top: 1px solid var(--border);
+  }
 }

@@ -585,7 +585,7 @@ Az \(e^{-\lambda t}\) **csillapítási tényező**, amely \(\lambda>0\) esetén 
 
 **1. változat – egyetlen csillapodó görbe.**
 
-:::processing-example title="Paraméteres kompozíció – 1. változat" image="media/12-vonalkompozicio-1.webp"
+:::processing-example title="Csillapodó paraméteres görbe" image="media/12-vonalkompozicio-1.webp"
 ```processing
 void setup() {
   size(900, 600);
@@ -612,7 +612,7 @@ Az `exp(-0.045 * t)` mindkét koordinátát ugyanazzal a csillapítási tényez�
 
 **2. változat – több, kissé eltérő görbe.** A külső ciklus többször rajzolja meg a mintát, de a `phase` (fáziseltolás) értéke minden alkalommal más lesz. Ez azt jelenti, hogy a szinuszfüggvényt kissé eltoljuk a paraméter mentén: `sin(3t + phase)`. A különböző fázisok miatt a vonalak nem pontosan ugyanarra a pályára esnek.
 
-:::processing-example title="Paraméteres kompozíció – 2. változat" image="media/13-vonalkompozicio-2.webp"
+:::processing-example title="Több eltérő paraméterű görbe" image="media/13-vonalkompozicio-2.webp"
 ```processing
 void setup() {
   size(900, 600);
@@ -639,9 +639,9 @@ void setup() {
 ```
 :::
 
-**3. változat – színváltoztatás.** A színkomponensek a `k` ciklusváltozó szerint módosulnak. A `stroke(vörös, zöld, kék, alfa)` negyedik paramétere az áttetszőséget adja meg: kisebb értéknél a vonal halványabb, így az egymásra kerülő szakaszok különböző tónusokat hozhatnak létre. A példában nem változik a görbék csillapítása; csak a fázisuk és a színük tér el.
+**A színezés módosítása.** Az előző program a görbék számát és alakját már meghatározta. Most a színkomponensek a `k` ciklusváltozó szerint módosulnak. A `stroke(vörös, zöld, kék, alfa)` negyedik paramétere az áttetszőséget adja meg: kisebb értéknél a vonal halványabb, így az egymásra kerülő szakaszok különböző tónusokat hozhatnak létre. A példában nem változik a görbék csillapítása; csak a fázisuk és a színük tér el.
 
-:::processing-example title="Paraméteres kompozíció – 3. változat" image="media/14-vonalkompozicio-3.webp"
+:::processing-example title="Színváltozatok egymásra rajzolása" image="media/14-vonalkompozicio-3.webp"
 ```processing
 void setup() {
   size(900, 600);
@@ -668,9 +668,9 @@ void setup() {
 ```
 :::
 
-**4. változat – több motívumból álló kompozíció.** A rajzolást saját metódusba szervezzük. A `drawMotif()` megkapja a középpont (`cx`, `cy`) koordinátáit, a két irány kiterjedését (`ax`, `ay`), a frekvenciákat (`fx`, `fy`) és az alapszínt (`c`). Ugyanaz a megoldás három eltérő helyen készít mintázatot. A `pushMatrix()` és `popMatrix()` gondoskodik arról, hogy az egyik motívumhoz végzett eltolás ne módosítsa a következő helyét.
+**Több motívum elhelyezése.** Az eddig egy helyre rajzolt mintát többször használjuk a rajzfelületen. A rajzolást saját metódusba szervezzük. A `drawMotif()` megkapja a középpont (`cx`, `cy`) koordinátáit, a két irány kiterjedését (`ax`, `ay`), a frekvenciákat (`fx`, `fy`) és az alapszínt (`c`). Ugyanaz a megoldás három eltérő helyen készít mintázatot. A `pushMatrix()` és `popMatrix()` gondoskodik arról, hogy az egyik motívumhoz végzett eltolás ne módosítsa a következő helyét.
 
-:::processing-example title="Paraméteres kompozíció – 4. változat" image="media/15-vonalkompozicio-4.webp"
+:::processing-example title="Több motívumból álló kompozíció" image="media/15-vonalkompozicio-4.webp"
 ```processing
 void setup() {
   size(950, 620);
@@ -711,13 +711,13 @@ void drawMotif(float cx, float cy,
 ```
 :::
 
-### 2. Térbeli kompozíció csavarodó keresztmetszetekből
+### Kompozíció csavarodó keresztmetszetekből
 
 A második kompozíciót egy térbeli körpályából építjük fel. A pálya képletei \(x(t)=185\cos t\), \(y(t)=185\sin t\), \(z(t)=0\), ahol \(t\in[0,2\pi]\). Először csak a pályát rajzoljuk meg, majd négyzetes keresztmetszeteket helyezünk el rajta. Ezután a keresztmetszeteket a pálya érintőjének irányában elforgatjuk, végül több, eltérő paraméterű rendszert helyezünk el ugyanabban a jelenetben.
 
 **1. változat – a körpálya megjelenítése.** A pálya vonalát a `vertex(x, y, z)` segítségével állítjuk elő.
 
-:::processing-example title="Térbeli kompozíció – 1. változat" image="media/16-terbeli-kompozicio-1.webp"
+:::processing-example title="Térbeli pálya megrajzolása" image="media/16-terbeli-kompozicio-1.webp"
 ```processing
 void setup() {
   size(900, 650, P3D);
@@ -742,9 +742,9 @@ void draw() {
 ```
 :::
 
-**2. változat – négyzetes keresztmetszetek.** Most a görbe kiválasztott pontjain a négyzetet a pályára merőleges síkban rajzoljuk ki. Még nincs saját csavarodás.
+**Négyzetes keresztmetszetek.** A görbe önmagában továbbra is csak vonal. Most a görbe kiválasztott pontjain a négyzetet a pályára merőleges síkban rajzoljuk ki. Még nincs saját csavarodás.
 
-:::processing-example title="Térbeli kompozíció – 2. változat" image="media/17-terbeli-kompozicio-2.webp"
+:::processing-example title="Négyzetes keresztmetszetek a pálya mentén" image="media/17-terbeli-kompozicio-2.webp"
 ```processing
 void setup() {
   size(900, 650, P3D);
@@ -773,9 +773,9 @@ void draw() {
 ```
 :::
 
-**3. változat – csavarodó keresztmetszetek.** A helyi elforgatás szögét a \(t\) paraméterből számítjuk: \(\varphi(t)=t\). A `rotateY(t)` a négyzetet az aktuális helyi tengely körül forgatja. Így egy teljes körbejárás alatt a négyzet egyszer körbefordul a keresztmetszeti síkjában.
+**A keresztmetszetek elforgatása.** A második programhoz képest a helyi elforgatás szögét a \(t\) paraméterből számítjuk: \(\varphi(t)=t\). A `rotateY(t)` a négyzetet az aktuális helyi tengely körül forgatja. Így egy teljes körbejárás alatt a négyzet egyszer körbefordul a keresztmetszeti síkjában.
 
-:::processing-example title="Térbeli kompozíció – 3. változat" image="media/18-terbeli-kompozicio-3.webp"
+:::processing-example title="Csavarodó keresztmetszetek" image="media/18-terbeli-kompozicio-3.webp"
 ```processing
 void setup() {
   size(900, 650, P3D);
@@ -805,9 +805,9 @@ void draw() {
 ```
 :::
 
-**4. változat – több egymásba helyezett szerkezet.** Az ismétlődő rajzolást `drawTwistedRing()` metódusba helyezzük. A `radius` a kör sugara, a `sectionSize` a négyzet alapmérete, a `twistCount` a körbejárás alatti teljes csavarodások száma, a `c` pedig a szín. A méretet a `size(t) = sectionSize · (0.85 + 0.15 sin(4t))` összefüggés szerint is változtatjuk. Három eltérő rendszer együtteséből állítjuk elő a végső kompozíciót.
+**Több összetartozó szerkezet.** A korábbi lépés egyetlen keresztmetszet-sorozatot forgatott. Most az ismétlődő rajzolást `drawTwistedRing()` metódusba helyezzük. A `radius` a kör sugara, a `sectionSize` a négyzet alapmérete, a `twistCount` a körbejárás alatti teljes csavarodások száma, a `c` pedig a szín. A méretet a `size(t) = sectionSize · (0.85 + 0.15 sin(4t))` összefüggés szerint is változtatjuk. Három eltérő rendszer együtteséből állítjuk elő a végső kompozíciót.
 
-:::processing-example title="Térbeli kompozíció – 4. változat" image="media/19-terbeli-kompozicio-4.webp"
+:::processing-example title="Összetett térbeli szerkezet" image="media/19-terbeli-kompozicio-4.webp"
 ```processing
 void setup() {
   size(900, 650, P3D);

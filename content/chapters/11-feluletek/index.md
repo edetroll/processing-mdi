@@ -47,6 +47,8 @@ float heightAt(float x, float y) {
 ```
 :::
 
+A második program **nem új pontokat számít**, hanem ugyanazt a rácsot felületelemekkel tölti ki. A `noFill()` helyét kitöltés, a vonalháló önálló megjelenítését pedig a `lights()` által megvilágított felület veszi át. A következő lépésben az egyes csúcsok színét is a magasságukhoz fogjuk kötni.
+
 :::processing-example title="Ugyanaz a felület kitöltve és megvilágítva" image="media/02-kitoltott.webp"
 ```processing
 void setup() {
@@ -60,7 +62,6 @@ void draw() {
   rotateX(PI/3);
   rotateZ(-PI/5);
   lights();
-  fill(65, 167, 195);
   stroke(19, 69, 95);
   strokeWeight(0.8);
 
@@ -72,8 +73,10 @@ void draw() {
     beginShape(QUAD_STRIP);
     for (int col = 0; col <= n; col++) {
       float x = -230 + col * step;
-      vertex(x, y0, heightAt(x, y0));
-      vertex(x, y1, heightAt(x, y1));
+      float z0 = heightAt(x, y0);
+      float z1 = heightAt(x, y1);
+      fill(surfaceColor(z0)); vertex(x, y0, z0);
+      fill(surfaceColor(z1)); vertex(x, y1, z1);
     }
     endShape();
   }
@@ -82,10 +85,19 @@ void draw() {
 float heightAt(float x, float y) {
   return 62 * sin(x * 0.023) * cos(y * 0.023);
 }
+
+color surfaceColor(float h) {
+  float t = constrain(map(h, -125, 170, 0, 1), 0, 1);
+  color deep = color(35, 88, 151);
+  color mid = color(56, 191, 194);
+  color high = color(248, 168, 106);
+  if (t < 0.5) return lerpColor(deep, mid, 2*t);
+  return lerpColor(mid, high, 2*t-1);
+}
 ```
 :::
 
-A két programban **ugyanazok a pontok** keletkeznek. A különbség kizárólag a rajzolási beállításokban van. A `lights()` lehetővé teszi, hogy a felület eltérő irányú részei különböző világossággal jelenjenek meg. A `noLoop()` azért használható, mert a felület nem változik.
+A két programban **ugyanazok a pontok** keletkeznek. A különbség a rajzolási beállításokban van. A `lights()` a felület részeinek eltérő világosságát eredményezi, a `surfaceColor()` pedig a magasságot kékeszöld és meleg színekkel jelzi. A `lerpColor()` két szín között képez átmenetet, a `constrain()` pedig a kiválasztott színtartományban tartja az értéket. A `noLoop()` azért használható, mert a felület nem változik.
 
 ## Explicit felületek {#explicit}
 
@@ -95,7 +107,7 @@ Ha az első két koordináta szabadon megválasztható, a harmadikat pedig egy f
 z=f(x,y),\qquad x\in[a,b],\quad y\in[c,d].
 \]
 
-A kiinduló programban csak a `heightAt(x, y)` függvény tartalmát kell megváltoztatni. A `heightAt` neve itt a magasságra utal, de a Processingben a függvény eredményét a harmadik, **z koordinátaként** adjuk át a `vertex()` hívásnak. A megvilágítást és a nézetet a `translate()` és `rotateX()/rotateZ()` beállításai határozzák meg.
+A geometriai forma a `heightAt(x, y)` függvény cseréjével változtatható. A csúcspontok színét ettől függetlenül a `surfaceColor()` számítja ki a magasság alapján. A `heightAt` neve itt a magasságra utal, de a Processingben a függvény eredményét a harmadik, **z koordinátaként** adjuk át a `vertex()` hívásnak. A megvilágítást és a nézetet a `translate()` és `rotateX()/rotateZ()` beállításai határozzák meg.
 
 **Hullámfelület.** Két egymásra merőleges irányú hullám szorzata:
 
@@ -118,7 +130,6 @@ void draw() {
   rotateX(PI/3);
   rotateZ(-PI/5);
   lights();
-  fill(65, 167, 195);
   stroke(19, 69, 95);
   strokeWeight(0.8);
 
@@ -130,8 +141,10 @@ void draw() {
     beginShape(QUAD_STRIP);
     for (int col = 0; col <= n; col++) {
       float x = -230 + col * step;
-      vertex(x, y0, heightAt(x, y0));
-      vertex(x, y1, heightAt(x, y1));
+      float z0 = heightAt(x, y0);
+      float z1 = heightAt(x, y1);
+      fill(surfaceColor(z0)); vertex(x, y0, z0);
+      fill(surfaceColor(z1)); vertex(x, y1, z1);
     }
     endShape();
   }
@@ -139,6 +152,15 @@ void draw() {
 
 float heightAt(float x, float y) {
   return 62 * sin(x * 0.023) * cos(y * 0.023);
+}
+
+color surfaceColor(float h) {
+  float t = constrain(map(h, -125, 170, 0, 1), 0, 1);
+  color deep = color(35, 88, 151);
+  color mid = color(56, 191, 194);
+  color high = color(248, 168, 106);
+  if (t < 0.5) return lerpColor(deep, mid, 2*t);
+  return lerpColor(mid, high, 2*t-1);
 }
 ```
 :::
@@ -164,7 +186,6 @@ void draw() {
   rotateX(PI/3);
   rotateZ(-PI/5);
   lights();
-  fill(236, 157, 94);
   stroke(19, 69, 95);
   strokeWeight(0.8);
 
@@ -176,8 +197,10 @@ void draw() {
     beginShape(QUAD_STRIP);
     for (int col = 0; col <= n; col++) {
       float x = -230 + col * step;
-      vertex(x, y0, heightAt(x, y0));
-      vertex(x, y1, heightAt(x, y1));
+      float z0 = heightAt(x, y0);
+      float z1 = heightAt(x, y1);
+      fill(surfaceColor(z0)); vertex(x, y0, z0);
+      fill(surfaceColor(z1)); vertex(x, y1, z1);
     }
     endShape();
   }
@@ -187,6 +210,15 @@ float heightAt(float x, float y) {
   float A = 155;
   float s = 145;
   return A * exp(-(x*x + y*y) / (s*s));
+}
+
+color surfaceColor(float h) {
+  float t = constrain(map(h, -125, 170, 0, 1), 0, 1);
+  color deep = color(35, 88, 151);
+  color mid = color(56, 191, 194);
+  color high = color(248, 168, 106);
+  if (t < 0.5) return lerpColor(deep, mid, 2*t);
+  return lerpColor(mid, high, 2*t-1);
 }
 ```
 :::
@@ -212,7 +244,6 @@ void draw() {
   rotateX(PI/3);
   rotateZ(-PI/5);
   lights();
-  fill(151, 124, 226);
   stroke(19, 69, 95);
   strokeWeight(0.8);
 
@@ -224,8 +255,10 @@ void draw() {
     beginShape(QUAD_STRIP);
     for (int col = 0; col <= n; col++) {
       float x = -230 + col * step;
-      vertex(x, y0, heightAt(x, y0));
-      vertex(x, y1, heightAt(x, y1));
+      float z0 = heightAt(x, y0);
+      float z1 = heightAt(x, y1);
+      fill(surfaceColor(z0)); vertex(x, y0, z0);
+      fill(surfaceColor(z1)); vertex(x, y1, z1);
     }
     endShape();
   }
@@ -233,6 +266,15 @@ void draw() {
 
 float heightAt(float x, float y) {
   return 0.0015 * (x*x - y*y);
+}
+
+color surfaceColor(float h) {
+  float t = constrain(map(h, -125, 170, 0, 1), 0, 1);
+  color deep = color(35, 88, 151);
+  color mid = color(56, 191, 194);
+  color high = color(248, 168, 106);
+  if (t < 0.5) return lerpColor(deep, mid, 2*t);
+  return lerpColor(mid, high, 2*t-1);
 }
 ```
 :::
@@ -251,7 +293,7 @@ v\in[v_{\min},v_{\max}].
 \end{aligned}
 \]
 
-A két egymásba ágyazott ciklus az \(u\) és \(v\) paraméterek értékeit változtatja. A felület megrajzolásának menete változatlan: a szomszédos mintákból négyszögsávokat készítünk. A következő program általános vázként is használható: a `surfaceX`, `surfaceY`, `surfaceZ` függvények, a paramétertartományok és a mintavételi felbontás cserélhető.
+A két egymásba ágyazott ciklus az \(u\) és \(v\) paraméterek értékeit változtatja. A felület megrajzolásának menete változatlan: a szomszédos mintákból négyszögsávokat készítünk. Az explicit felületekhez képest most nem csak a magasságot számítjuk, hanem minden mintapont teljes \((x,y,z)\) koordinátáját. A következő program általános vázként is használható: a `surfaceX`, `surfaceY`, `surfaceZ` függvények, a paramétertartományok és a mintavételi felbontás cserélhető.
 
 **Tórusz.** A \(R\) a tórusz középvonali sugara, az \(r\) a cső sugara:
 
@@ -282,7 +324,6 @@ void draw() {
   translate(width/2, height/2, 0);
   rotateX(-0.52);
   rotateY(frameCount * 0.004);
-  fill(78, 186, 195);
   stroke(25, 89, 110, 85);
   strokeWeight(0.6);
 
@@ -292,8 +333,11 @@ void draw() {
     beginShape(QUAD_STRIP);
     for (int j = 0; j <= vSteps; j++) {
       float v = map(j, 0, vSteps, vMin, vMax);
-      vertex(surfaceX(u0, v), surfaceY(u0, v), surfaceZ(u0, v));
-      vertex(surfaceX(u1, v), surfaceY(u1, v), surfaceZ(u1, v));
+      float z0 = surfaceZ(u0, v), z1 = surfaceZ(u1, v);
+      fill(surfaceColor(z0));
+      vertex(surfaceX(u0, v), surfaceY(u0, v), z0);
+      fill(surfaceColor(z1));
+      vertex(surfaceX(u1, v), surfaceY(u1, v), z1);
     }
     endShape();
   }
@@ -311,10 +355,19 @@ float surfaceZ(float u, float v) {
   float r = 64;
   return r*sin(v);
 }
+
+color surfaceColor(float h) {
+  float t = constrain(map(h, -125, 170, 0, 1), 0, 1);
+  color deep = color(35, 88, 151);
+  color mid = color(56, 191, 194);
+  color high = color(248, 168, 106);
+  if (t < 0.5) return lerpColor(deep, mid, 2*t);
+  return lerpColor(mid, high, 2*t-1);
+}
 ```
 :::
 
-**Gömb.** A \(r\) sugarú gömb felületének egyik paraméterezése:
+**Gömb.** A tóruszhoz hasonlóan most is kétparaméteres felületet használunk, de megváltoztatjuk a `v` tartományát és a három `surface` metódus képletét. A \(r\) sugarú gömb felületének egyik paraméterezése:
 
 \[
 \begin{aligned}
@@ -343,7 +396,6 @@ void draw() {
   translate(width/2, height/2, 0);
   rotateX(-0.52);
   rotateY(frameCount * 0.004);
-  fill(101, 146, 237);
   stroke(25, 89, 110, 85);
   strokeWeight(0.6);
 
@@ -353,8 +405,11 @@ void draw() {
     beginShape(QUAD_STRIP);
     for (int j = 0; j <= vSteps; j++) {
       float v = map(j, 0, vSteps, vMin, vMax);
-      vertex(surfaceX(u0, v), surfaceY(u0, v), surfaceZ(u0, v));
-      vertex(surfaceX(u1, v), surfaceY(u1, v), surfaceZ(u1, v));
+      float z0 = surfaceZ(u0, v), z1 = surfaceZ(u1, v);
+      fill(surfaceColor(z0));
+      vertex(surfaceX(u0, v), surfaceY(u0, v), z0);
+      fill(surfaceColor(z1));
+      vertex(surfaceX(u1, v), surfaceY(u1, v), z1);
     }
     endShape();
   }
@@ -369,10 +424,19 @@ float surfaceY(float u, float v) {
 float surfaceZ(float u, float v) {
   return 200 * cos(v);
 }
+
+color surfaceColor(float h) {
+  float t = constrain(map(h, -125, 170, 0, 1), 0, 1);
+  color deep = color(35, 88, 151);
+  color mid = color(56, 191, 194);
+  color high = color(248, 168, 106);
+  if (t < 0.5) return lerpColor(deep, mid, 2*t);
+  return lerpColor(mid, high, 2*t-1);
+}
 ```
 :::
 
-**Möbius-szalag.** A középvonal egy kör, miközben a körülötte elhelyezett szakasz a teljes körbejárás alatt fél fordulatot tesz:
+**Möbius-szalag.** Az előző két felület zárt és forgásszimmetrikus volt. A Möbius-szalagnál a második paraméter egy keskeny szalag szélességén halad végig; a középvonal egy kör, miközben a körülötte elhelyezett szakasz a teljes körbejárás alatt fél fordulatot tesz:
 
 \[
 \begin{aligned}
@@ -401,7 +465,6 @@ void draw() {
   translate(width/2, height/2, 0);
   rotateX(-0.52);
   rotateY(frameCount * 0.004);
-  fill(245, 170, 111);
   stroke(25, 89, 110, 85);
   strokeWeight(0.6);
 
@@ -411,8 +474,11 @@ void draw() {
     beginShape(QUAD_STRIP);
     for (int j = 0; j <= vSteps; j++) {
       float v = map(j, 0, vSteps, vMin, vMax);
-      vertex(surfaceX(u0, v), surfaceY(u0, v), surfaceZ(u0, v));
-      vertex(surfaceX(u1, v), surfaceY(u1, v), surfaceZ(u1, v));
+      float z0 = surfaceZ(u0, v), z1 = surfaceZ(u1, v);
+      fill(surfaceColor(z0));
+      vertex(surfaceX(u0, v), surfaceY(u0, v), z0);
+      fill(surfaceColor(z1));
+      vertex(surfaceX(u1, v), surfaceY(u1, v), z1);
     }
     endShape();
   }
@@ -427,10 +493,19 @@ float surfaceY(float u, float v) {
 float surfaceZ(float u, float v) {
   return v*sin(u/2);
 }
+
+color surfaceColor(float h) {
+  float t = constrain(map(h, -125, 170, 0, 1), 0, 1);
+  color deep = color(35, 88, 151);
+  color mid = color(56, 191, 194);
+  color high = color(248, 168, 106);
+  if (t < 0.5) return lerpColor(deep, mid, 2*t);
+  return lerpColor(mid, high, 2*t-1);
+}
 ```
 :::
 
-**Csavarfelület (helikoid).** Egy egyenes szakasz az origó körül forog, miközben a forgás szögével arányosan emelkedik:
+**Csavarfelület (helikoid).** A Möbius-szalaggal szemben itt nincs visszazáródó körpálya: a harmadik koordináta a szöggel együtt növekszik. Egy egyenes szakasz az origó körül forog, miközben a forgás szögével arányosan emelkedik:
 
 \[
 \begin{aligned}
@@ -459,7 +534,6 @@ void draw() {
   translate(width/2, height/2, 0);
   rotateX(-0.52);
   rotateY(frameCount * 0.004);
-  fill(176, 138, 224);
   stroke(25, 89, 110, 85);
   strokeWeight(0.6);
 
@@ -469,8 +543,11 @@ void draw() {
     beginShape(QUAD_STRIP);
     for (int j = 0; j <= vSteps; j++) {
       float v = map(j, 0, vSteps, vMin, vMax);
-      vertex(surfaceX(u0, v), surfaceY(u0, v), surfaceZ(u0, v));
-      vertex(surfaceX(u1, v), surfaceY(u1, v), surfaceZ(u1, v));
+      float z0 = surfaceZ(u0, v), z1 = surfaceZ(u1, v);
+      fill(surfaceColor(z0));
+      vertex(surfaceX(u0, v), surfaceY(u0, v), z0);
+      fill(surfaceColor(z1));
+      vertex(surfaceX(u1, v), surfaceY(u1, v), z1);
     }
     endShape();
   }
@@ -485,6 +562,15 @@ float surfaceY(float u, float v) {
 float surfaceZ(float u, float v) {
   return 22*u;
 }
+
+color surfaceColor(float h) {
+  float t = constrain(map(h, -125, 170, 0, 1), 0, 1);
+  color deep = color(35, 88, 151);
+  color mid = color(56, 191, 194);
+  color high = color(248, 168, 106);
+  if (t < 0.5) return lerpColor(deep, mid, 2*t);
+  return lerpColor(mid, high, 2*t-1);
+}
 ```
 :::
 
@@ -492,28 +578,29 @@ A Klein-kancsó további érdekes példa egy olyan felületre, amely önmetszés
 
 ## Kontrollpontokkal meghatározott felületek {#bezier}
 
-A görbéknél már láttuk, hogy a Bézier-görbe alakját kontrollpontok befolyásolják. Felületnél ugyanez két irányban történik: egy **4×4-es kontrollhálóból** kétdimenziós paramétertartományon értelmezett, harmadfokú Bézier-felületet számítunk.
+A Bézier-görbe alakját kontrollpontok befolyásolják. A kétparaméteres Bézier-felületet hasonlóan határozzuk meg: a pontok most egy **4×4-es kontrollhálót** alkotnak. A háló két irányban összekötött, összesen 16 pontból áll; ez a felületet vezérlő geometria, **nem maga a felület**.
 
 \[
-S(u,v)=\sum_{i=0}^{3}\sum_{j=0}^{3} B_i^3(u)\,B_j^3(v)\,P_{ij},
+S(u,v)=\sum_{i=0}^{3}\sum_{j=0}^{3}B_i^3(u)B_j^3(v)P_{ij},
 \qquad u,v\in[0,1].
 \]
 
-A \(P_{ij}\) a 16 térbeli kontrollpontot jelöli, a \(B_i^3\) pedig a harmadfokú Bernstein-polinomokat. A képlet gyakorlati jelentése egyszerű: a felület egyes pontjai a kontrollpontok súlyozott összegeként keletkeznek. A kontrollpontok általában **nem a felületen** helyezkednek el; a négy sarokpont viszont a megfelelő négy felületsarokkal esik egybe.
+A \(P_{ij}\) kontrollpontok térbeli koordináták, a \(B_i^3\) pedig a harmadfokú Bernstein-polinomok. A felület egy pontját a program a kontrollpontok súlyozott összegeként számítja ki. A négy sarokpont a felület sarokpontja is; a többi kontrollpont általában nem helyezkedik el a felületen.
 
-:::processing-example title="Bézier-felület 1. – a teljes 4×4-es kontrollháló" image="media/10-bezier-halo.webp"
+**A kontrollháló.** Először csak a 16 pontot és az őket mindkét rácsirányban összekötő szakaszokat rajzoljuk meg. A `PVector` három koordinátát tárol. A következő két program ugyanazt a `control` tömböt fogja használni, ezért a felület és a kontrollháló viszonya közvetlenül összehasonlítható.
+
+:::processing-example title="A Bézier-felület kontrollhálója" image="media/10-bezier-halo.webp"
 ```processing
 PVector[][] control = new PVector[4][4];
-boolean showSurface = false;
-boolean interactive = false;
 
 void setup() {
   size(900, 620, P3D);
+  ortho();
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 4; j++) {
       float x = (i - 1.5) * 135;
       float y = (j - 1.5) * 135;
-      float z = 65*sin(i*1.1)*cos(j*1.15);
+      float z = 65 * sin(i * 1.1) * cos(j * 1.15);
       control[i][j] = new PVector(x, y, z);
     }
   }
@@ -521,37 +608,72 @@ void setup() {
 
 void draw() {
   background(13, 21, 35);
-  lights();
-  if (interactive) {
-    control[1][1].z = map(mouseX, 0, width, -175, 175);
-    control[2][2].z = map(mouseY, 0, height, 175, -175);
-  }
   translate(width/2, height/2, 0);
-  rotateX(0.82);
+  rotateX(0.78);
   rotateZ(-PI/5);
-
-  if (showSurface) {
-    noStroke();
-    fill(81, 189, 205);
-    int n = 34;
-    for (int i = 0; i < n; i++) {
-      float u0 = i/(float)n;
-      float u1 = (i+1)/(float)n;
-      beginShape(QUAD_STRIP);
-      for (int j = 0; j <= n; j++) {
-        float v = j/(float)n;
-        PVector a = surface(u0,v);
-        PVector b = surface(u1,v);
-        vertex(a.x,a.y,a.z);
-        vertex(b.x,b.y,b.z);
-      }
-      endShape();
+  stroke(246, 172, 100);
+  strokeWeight(2);
+  for (int i = 0; i < 4; i++) {
+    for (int j = 0; j < 3; j++) {
+      PVector a = control[i][j], b = control[i][j+1];
+      line(a.x, a.y, a.z, b.x, b.y, b.z);
+      a = control[j][i]; b = control[j+1][i];
+      line(a.x, a.y, a.z, b.x, b.y, b.z);
     }
   }
+  strokeWeight(10);
+  for (int i = 0; i < 4; i++) {
+    for (int j = 0; j < 4; j++) {
+      PVector p = control[i][j];
+      point(p.x, p.y, p.z);
+    }
+  }
+}
+```
+:::
 
-  // Kontrollhalo: a szomszedos kontrollpontokat osszekotjuk.
-  stroke(250, 177, 112);
-  strokeWeight(1.6);
+**A kiszámított felület.** A második program a kontrollhálón kívül a belőle számított felületet is megjeleníti. Az új `bernstein()` metódus a súlyokat adja meg, a `surface(u,v)` pedig ezeket összegzi az összes kontrollpont koordinátájával. A `QUAD_STRIP` ciklus már ennek a metódusnak az eredményéből építi fel a felületet, nem közvetlenül a kontrollpontokból. A szín az így kapott pontok magasságától függ.
+
+:::processing-example title="A kontrollháló és a számított Bézier-felület" image="media/11-bezier-felulet.webp"
+```processing
+PVector[][] control = new PVector[4][4];
+
+void setup() {
+  size(900, 620, P3D);
+  ortho();
+  for (int i = 0; i < 4; i++) {
+    for (int j = 0; j < 4; j++) {
+      control[i][j] = new PVector(
+        (i - 1.5) * 135, (j - 1.5) * 135,
+        65 * sin(i * 1.1) * cos(j * 1.15));
+    }
+  }
+}
+
+void draw() {
+  background(13, 21, 35);
+  ambientLight(110, 110, 110);
+  directionalLight(220, 220, 220, -0.4, -0.7, -1);
+  translate(width/2, height/2, 0);
+  rotateX(0.78);
+  rotateZ(-PI/5);
+
+  noStroke();
+  for (int i = 0; i < 40; i++) {
+    float u0 = i/40.0, u1 = (i+1)/40.0;
+    beginShape(QUAD_STRIP);
+    for (int j = 0; j <= 40; j++) {
+      float v = j/40.0;
+      PVector a = surface(u0, v), b = surface(u1, v);
+      fill(surfaceColor(a.z)); vertex(a.x, a.y, a.z);
+      fill(surfaceColor(b.z)); vertex(b.x, b.y, b.z);
+    }
+    endShape();
+  }
+
+  hint(DISABLE_DEPTH_TEST); // A kontrollhalo a felulet elott is lathato.
+  stroke(246, 172, 100);
+  strokeWeight(2);
   for (int i = 0; i < 4; i++) {
     for (int j = 0; j < 3; j++) {
       PVector a = control[i][j], b = control[i][j+1];
@@ -560,13 +682,13 @@ void draw() {
       line(a.x,a.y,a.z,b.x,b.y,b.z);
     }
   }
-  strokeWeight(8);
-  for (int i = 0; i < 4; i++) {
+  strokeWeight(9);
+  for (int i = 0; i < 4; i++)
     for (int j = 0; j < 4; j++) {
       PVector p = control[i][j];
       point(p.x,p.y,p.z);
     }
-  }
+  hint(ENABLE_DEPTH_TEST);
 }
 
 float bernstein(int i, float t) {
@@ -577,89 +699,121 @@ float bernstein(int i, float t) {
 }
 
 PVector surface(float u, float v) {
-  PVector result = new PVector();
-  for (int i = 0; i < 4; i++) {
+  PVector p = new PVector();
+  for (int i = 0; i < 4; i++)
     for (int j = 0; j < 4; j++) {
-      float weight = bernstein(i,u)*bernstein(j,v);
-      result.x += weight*control[i][j].x;
-      result.y += weight*control[i][j].y;
-      result.z += weight*control[i][j].z;
+      float w = bernstein(i,u) * bernstein(j,v);
+      p.add(PVector.mult(control[i][j], w));
     }
-  }
-  return result;
+  return p;
+}
+
+color surfaceColor(float z) {
+  return lerpColor(color(45, 151, 197), color(247, 178, 110),
+    constrain(map(z, -130, 160, 0, 1), 0, 1));
 }
 ```
 :::
 
-A kontrollháló éleit **mindkét rácsirányban** kirajzoljuk; a megjelenített vonalak nem a Bézier-felület élei. A 16 pontból egy térbeli hálózatot látunk. A `bernstein()` függvény a súlyokat, a `surface(u,v)` a felület egy pontját számítja ki.
+**A kontrollpontok módosítása egérrel.** Most a kontrollháló egy pontjára kattinthatunk, majd **az egér függőleges mozgatásával a kijelölt pont magasságát** változtathatjuk. A `screenX()` és `screenY()` a térbeli pont vetített képernyő-koordinátáját adja meg; ebből tudjuk kiválasztani a kattintáshoz legközelebbi pontot. A `mouseDragged()` csak a kiválasztott pont `z` értékét módosítja. A `draw()` ezután ugyanabból a `control` tömbből **újraszámítja a felület minden csúcspontját**, tehát a felület ténylegesen követi a kontrollháló változását.
 
-:::processing-example title="Bézier-felület 2. – felület és kontrollháló" image="media/11-bezier-felulet.webp"
+:::processing-example title="A kontrollpontok módosítása egérrel" image="media/12-bezier-interaktiv.webp"
 ```processing
 PVector[][] control = new PVector[4][4];
-boolean showSurface = true;
-boolean interactive = false;
+int selectedI = -1, selectedJ = -1;
+int startMouseY;
+float startHeight;
 
 void setup() {
   size(900, 620, P3D);
-  for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < 4; j++) {
-      float x = (i - 1.5) * 135;
-      float y = (j - 1.5) * 135;
-      float z = 65*sin(i*1.1)*cos(j*1.15);
-      control[i][j] = new PVector(x, y, z);
-    }
-  }
+  ortho();
+  for (int i = 0; i < 4; i++)
+    for (int j = 0; j < 4; j++)
+      control[i][j] = new PVector(
+        (i-1.5)*135, (j-1.5)*135,
+        65*sin(i*1.1)*cos(j*1.15));
+}
+
+void setView() {
+  translate(width/2, height/2, 0);
+  rotateX(0.78);
+  rotateZ(-PI/5);
 }
 
 void draw() {
   background(13, 21, 35);
-  lights();
-  if (interactive) {
-    control[1][1].z = map(mouseX, 0, width, -175, 175);
-    control[2][2].z = map(mouseY, 0, height, 175, -175);
-  }
-  translate(width/2, height/2, 0);
-  rotateX(0.82);
-  rotateZ(-PI/5);
+  ambientLight(110, 110, 110);
+  directionalLight(220, 220, 220, -0.4, -0.7, -1);
+  pushMatrix();
+  setView();
 
-  if (showSurface) {
-    noStroke();
-    fill(81, 189, 205);
-    int n = 34;
-    for (int i = 0; i < n; i++) {
-      float u0 = i/(float)n;
-      float u1 = (i+1)/(float)n;
-      beginShape(QUAD_STRIP);
-      for (int j = 0; j <= n; j++) {
-        float v = j/(float)n;
-        PVector a = surface(u0,v);
-        PVector b = surface(u1,v);
-        vertex(a.x,a.y,a.z);
-        vertex(b.x,b.y,b.z);
-      }
-      endShape();
+  noStroke();
+  for (int i = 0; i < 40; i++) {
+    float u0 = i/40.0, u1 = (i+1)/40.0;
+    beginShape(QUAD_STRIP);
+    for (int j = 0; j <= 40; j++) {
+      float v = j/40.0;
+      PVector a = surface(u0,v), b = surface(u1,v);
+      fill(surfaceColor(a.z)); vertex(a.x,a.y,a.z);
+      fill(surfaceColor(b.z)); vertex(b.x,b.y,b.z);
     }
+    endShape();
   }
 
-  // Kontrollhalo: a szomszedos kontrollpontokat osszekotjuk.
-  stroke(250, 177, 112);
-  strokeWeight(1.6);
-  for (int i = 0; i < 4; i++) {
+  // Kijelolt pontot is lathatoan kiemeljuk.
+  hint(DISABLE_DEPTH_TEST);
+  stroke(247, 177, 108);
+  strokeWeight(2);
+  for (int i = 0; i < 4; i++)
     for (int j = 0; j < 3; j++) {
       PVector a = control[i][j], b = control[i][j+1];
       line(a.x,a.y,a.z,b.x,b.y,b.z);
       a = control[j][i]; b = control[j+1][i];
       line(a.x,a.y,a.z,b.x,b.y,b.z);
     }
-  }
-  strokeWeight(8);
-  for (int i = 0; i < 4; i++) {
+  for (int i = 0; i < 4; i++)
     for (int j = 0; j < 4; j++) {
       PVector p = control[i][j];
+      stroke(i == selectedI && j == selectedJ
+        ? color(255, 230, 125) : color(248, 183, 115));
+      strokeWeight(i == selectedI && j == selectedJ ? 18 : 11);
       point(p.x,p.y,p.z);
     }
+  hint(ENABLE_DEPTH_TEST);
+  popMatrix();
+}
+
+void mousePressed() {
+  selectedI = selectedJ = -1;
+  float best = 19;
+  pushMatrix();
+  setView();
+  for (int i = 0; i < 4; i++)
+    for (int j = 0; j < 4; j++) {
+      PVector p = control[i][j];
+      float d = dist(mouseX, mouseY,
+        screenX(p.x,p.y,p.z), screenY(p.x,p.y,p.z));
+      if (d < best) { best = d; selectedI = i; selectedJ = j; }
+    }
+  popMatrix();
+  if (selectedI >= 0) {
+    startMouseY = mouseY;
+    startHeight = control[selectedI][selectedJ].z;
   }
 }
+
+void mouseDragged() {
+  if (selectedI < 0) return;
+  PVector p = control[selectedI][selectedJ];
+  pushMatrix();
+  setView();
+  float pixelsPerUnit = screenY(p.x,p.y,1)-screenY(p.x,p.y,0);
+  popMatrix();
+  p.z = constrain(startHeight +
+    (mouseY-startMouseY)/pixelsPerUnit, -190, 190);
+}
+
+void mouseReleased() { selectedI = selectedJ = -1; }
 
 float bernstein(int i, float t) {
   if (i == 0) return pow(1-t, 3);
@@ -669,111 +823,23 @@ float bernstein(int i, float t) {
 }
 
 PVector surface(float u, float v) {
-  PVector result = new PVector();
-  for (int i = 0; i < 4; i++) {
+  PVector p = new PVector();
+  for (int i = 0; i < 4; i++)
     for (int j = 0; j < 4; j++) {
-      float weight = bernstein(i,u)*bernstein(j,v);
-      result.x += weight*control[i][j].x;
-      result.y += weight*control[i][j].y;
-      result.z += weight*control[i][j].z;
+      float w = bernstein(i,u)*bernstein(j,v);
+      p.add(PVector.mult(control[i][j], w));
     }
-  }
-  return result;
+  return p;
+}
+
+color surfaceColor(float z) {
+  return lerpColor(color(45,151,197), color(247,178,110),
+    constrain(map(z,-130,160,0,1),0,1));
 }
 ```
 :::
 
-:::processing-example title="Bézier-felület 3. – alakítás egérrel" image="media/12-bezier-interaktiv.webp"
-```processing
-PVector[][] control = new PVector[4][4];
-boolean showSurface = true;
-boolean interactive = true;
-
-void setup() {
-  size(900, 620, P3D);
-  for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < 4; j++) {
-      float x = (i - 1.5) * 135;
-      float y = (j - 1.5) * 135;
-      float z = 65*sin(i*1.1)*cos(j*1.15);
-      control[i][j] = new PVector(x, y, z);
-    }
-  }
-}
-
-void draw() {
-  background(13, 21, 35);
-  lights();
-  if (interactive) {
-    control[1][1].z = map(mouseX, 0, width, -175, 175);
-    control[2][2].z = map(mouseY, 0, height, 175, -175);
-  }
-  translate(width/2, height/2, 0);
-  rotateX(0.82);
-  rotateZ(-PI/5);
-
-  if (showSurface) {
-    noStroke();
-    fill(81, 189, 205);
-    int n = 34;
-    for (int i = 0; i < n; i++) {
-      float u0 = i/(float)n;
-      float u1 = (i+1)/(float)n;
-      beginShape(QUAD_STRIP);
-      for (int j = 0; j <= n; j++) {
-        float v = j/(float)n;
-        PVector a = surface(u0,v);
-        PVector b = surface(u1,v);
-        vertex(a.x,a.y,a.z);
-        vertex(b.x,b.y,b.z);
-      }
-      endShape();
-    }
-  }
-
-  // Kontrollhalo: a szomszedos kontrollpontokat osszekotjuk.
-  stroke(250, 177, 112);
-  strokeWeight(1.6);
-  for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < 3; j++) {
-      PVector a = control[i][j], b = control[i][j+1];
-      line(a.x,a.y,a.z,b.x,b.y,b.z);
-      a = control[j][i]; b = control[j+1][i];
-      line(a.x,a.y,a.z,b.x,b.y,b.z);
-    }
-  }
-  strokeWeight(8);
-  for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < 4; j++) {
-      PVector p = control[i][j];
-      point(p.x,p.y,p.z);
-    }
-  }
-}
-
-float bernstein(int i, float t) {
-  if (i == 0) return pow(1-t, 3);
-  if (i == 1) return 3*t*pow(1-t, 2);
-  if (i == 2) return 3*t*t*(1-t);
-  return t*t*t;
-}
-
-PVector surface(float u, float v) {
-  PVector result = new PVector();
-  for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < 4; j++) {
-      float weight = bernstein(i,u)*bernstein(j,v);
-      result.x += weight*control[i][j].x;
-      result.y += weight*control[i][j].y;
-      result.z += weight*control[i][j].z;
-    }
-  }
-  return result;
-}
-```
-:::
-
-A felület minden képkockában újraszámolódik. Az egér vízszintes helyzete a `control[1][1]`, a függőleges helyzete a `control[2][2]` kontrollpont magasságát változtatja. A többi pont változatlan marad, így jól megfigyelhető egy-egy kontrollpont hatásának kiterjedése. A `map()` a képernyő-koordinátából meghatározza a megengedett magasságtartományt.
+A kijelölt pont a húzás közben világosabb jelölést kap. A működés ellenőrizhető azzal is, hogy a kontrollháló egy belső pontját felemeljük: a felület közelében létrejövő domborulat a mozgatott pont felé változik, de a négy sarokpont a helyén marad. A **kontrollpont helye és a felület megfelelő mintapontja nem azonos**, ezért nem kell a felületnek a teljes hálóra ráfeküdnie.
 
 ## Kidolgozott példa – hullámzó felület {#kidolgozott}
 
@@ -790,7 +856,9 @@ z(x,y,t)&=A\sin(kr-\omega t)\,e^{-\lambda r}.
 
 Az \(r\) a hullámforrástól mért távolság, az \(A\) az induló amplitúdó, a \(k\) a térbeli hullámszám, az \(\omega\) az időbeli változás sebességét szabályozza. Az \(e^{-\lambda r}\) tényező **csillapítja** a hullámot: minél távolabb vagyunk a forrástól, annál kisebb lesz a kilengés. Processingben ezt `exp(-lambda * r)` formában írjuk.
 
-:::processing-example title="Hullámfelület 1. – egy időpillanat" image="media/13-hullam-egy.webp"
+**Rögzített időpillanat.** A `time` értéke nulla, a `noLoop()` miatt csak egyszer rajzolunk. Ebben a változatban a térben változó hullámmintát vizsgáljuk, az időbeli mozgás még nem szerepel.
+
+:::processing-example title="Hullámfelület – egy időpillanat" image="media/13-hullam-egy.webp"
 ```processing
 float time = 0;
 
@@ -804,7 +872,6 @@ void draw() {
   translate(width/2, height/2, 0);
   rotateX(PI/3);
   rotateZ(-PI/5);
-  fill(60, 173, 206);
   stroke(25, 79, 112, 75);
   strokeWeight(0.5);
 
@@ -816,8 +883,10 @@ void draw() {
     beginShape(QUAD_STRIP);
     for (int j = 0; j <= n; j++) {
       float x = -260 + j*step;
-      vertex(x, y0, surfaceHeight(x,y0,time));
-      vertex(x, y1, surfaceHeight(x,y1,time));
+      float z0 = surfaceHeight(x, y0, time);
+      float z1 = surfaceHeight(x, y1, time);
+      fill(surfaceColor(z0)); vertex(x, y0, z0);
+      fill(surfaceColor(z1)); vertex(x, y1, z1);
     }
     endShape();
   }
@@ -831,10 +900,21 @@ float surfaceHeight(float x, float y, float t) {
   float lambda = 0.006;
   return 105*sin(k*r - omega*t)*exp(-lambda*r);
 }
+
+color surfaceColor(float h) {
+  float t = constrain(map(h, -125, 170, 0, 1), 0, 1);
+  color deep = color(35, 88, 151);
+  color mid = color(56, 191, 194);
+  color high = color(248, 168, 106);
+  if (t < 0.5) return lerpColor(deep, mid, 2*t);
+  return lerpColor(mid, high, 2*t-1);
+}
 ```
 :::
 
-:::processing-example title="Hullámfelület 2. – terjedő hullám" image="media/14-hullam-mozgas.webp"
+**A hullám animálása.** A következő programból kikerül a `noLoop()`, és minden képkocka végén növeljük a `time` értékét. A `surfaceHeight()` képlete változatlan: a `sin(k*r - omega*t)` időfüggése miatt ugyanaz a felület most mozgásba jön. A színezés továbbra is a pillanatnyi magasságból készül.
+
+:::processing-example title="Hullámfelület – terjedő hullám" image="media/14-hullam-mozgas.webp"
 ```processing
 float time = 0;
 
@@ -848,7 +928,6 @@ void draw() {
   translate(width/2, height/2, 0);
   rotateX(PI/3);
   rotateZ(-PI/5);
-  fill(60, 173, 206);
   stroke(25, 79, 112, 75);
   strokeWeight(0.5);
 
@@ -860,8 +939,10 @@ void draw() {
     beginShape(QUAD_STRIP);
     for (int j = 0; j <= n; j++) {
       float x = -260 + j*step;
-      vertex(x, y0, surfaceHeight(x,y0,time));
-      vertex(x, y1, surfaceHeight(x,y1,time));
+      float z0 = surfaceHeight(x, y0, time);
+      float z1 = surfaceHeight(x, y1, time);
+      fill(surfaceColor(z0)); vertex(x, y0, z0);
+      fill(surfaceColor(z1)); vertex(x, y1, z1);
     }
     endShape();
   }
@@ -875,10 +956,21 @@ float surfaceHeight(float x, float y, float t) {
   float lambda = 0.006;
   return 105*sin(k*r - omega*t)*exp(-lambda*r);
 }
+
+color surfaceColor(float h) {
+  float t = constrain(map(h, -125, 170, 0, 1), 0, 1);
+  color deep = color(35, 88, 151);
+  color mid = color(56, 191, 194);
+  color high = color(248, 168, 106);
+  if (t < 0.5) return lerpColor(deep, mid, 2*t);
+  return lerpColor(mid, high, 2*t-1);
+}
 ```
 :::
 
-:::processing-example title="Hullámfelület 3. – két hullámforrás" image="media/15-hullam-ket.webp"
+**Két hullámforrás.** A végső változat két különböző pontból számítja a hullámok magasságát, majd összeadja őket. Ahol a két hullám azonos irányú kitérést okoz, ott nagyobb a felület elmozdulása; ellentétes kitérésnél részben kioltják egymást. A háló és a kamerabeállítás nem változik, csak a `surfaceHeight()` számítása.
+
+:::processing-example title="Hullámfelület – két hullámforrás" image="media/15-hullam-ket.webp"
 ```processing
 float time = 0;
 
@@ -892,7 +984,6 @@ void draw() {
   translate(width/2, height/2, 0);
   rotateX(PI/3);
   rotateZ(-PI/5);
-  fill(60, 173, 206);
   stroke(25, 79, 112, 75);
   strokeWeight(0.5);
 
@@ -904,8 +995,10 @@ void draw() {
     beginShape(QUAD_STRIP);
     for (int j = 0; j <= n; j++) {
       float x = -260 + j*step;
-      vertex(x, y0, surfaceHeight(x,y0,time));
-      vertex(x, y1, surfaceHeight(x,y1,time));
+      float z0 = surfaceHeight(x, y0, time);
+      float z1 = surfaceHeight(x, y1, time);
+      fill(surfaceColor(z0)); vertex(x, y0, z0);
+      fill(surfaceColor(z1)); vertex(x, y1, z1);
     }
     endShape();
   }
@@ -921,6 +1014,15 @@ float surfaceHeight(float x, float y, float t) {
   float wave1 = 90*sin(k*r1 - omega*t)*exp(-lambda*r1);
   float wave2 = 90*sin(k*r2 - omega*t + 1.5)*exp(-lambda*r2);
   return wave1 + wave2;
+}
+
+color surfaceColor(float h) {
+  float t = constrain(map(h, -125, 170, 0, 1), 0, 1);
+  color deep = color(35, 88, 151);
+  color mid = color(56, 191, 194);
+  color high = color(248, 168, 106);
+  if (t < 0.5) return lerpColor(deep, mid, 2*t);
+  return lerpColor(mid, high, 2*t-1);
 }
 ```
 :::
