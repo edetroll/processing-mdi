@@ -1,0 +1,25 @@
+/* Parametric-curve formulas in the Processing course */
+.markdown-body mjx-container[display="true"] {
+  display: block;
+  overflow-x: auto;
+  overflow-y: hidden;
+  margin: 1.05em 0 !important;
+  padding: .15em .3em;
+  max-width: 100%;
+  color: inherit;
+}
+.markdown-body mjx-container:not([display="true"]) {
+  color: inherit;
+}
+@media (max-width: 700px) {
+  .markdown-body mjx-container[display="true"] {
+    font-size: .94em;
+    text-align: left !important;
+  }
+}
+@media print {
+  .markdown-body mjx-container[display="true"] {
+    overflow: visible;
+    break-inside: avoid;
+  }
+}

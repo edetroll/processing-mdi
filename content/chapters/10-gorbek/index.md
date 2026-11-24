@@ -6,17 +6,31 @@ Ebben a fejezetben a paraméteres leírás alapgondolatára és a felhasználás
 
 ## Paraméteres görbék {#parameteres-gorbek}
 
-A síkbeli paraméteres görbe egy pontját két koordinátafüggvény határozza meg: `x(t)` és `y(t)`. A `t` egy változó, amelynek értékét egy megadott intervallumon végigvezetjük. Például egy kör esetében az `x(t) = R cos(t)` és `y(t) = R sin(t)` képleteket használhatjuk, ahol `t ∈ [0, 2π]` és `R` a kör sugara. Minden paraméterértékhez kiszámítunk egy pontot, majd az egymást követő pontokat összekötjük. Ha elég sok pontot számítunk, a vonal folyamatos görbének látszik.
+A síkbeli paraméteres görbe egy pontját két koordinátafüggvény határozza meg: \(x(t)\) és \(y(t)\). A \(t\) paraméter értékét egy megadott intervallumon változtatjuk. Például a \(R\) sugarú kör egyenletei:
 
-A fejezetben a képletek mellett mindenhol megadjuk a **paramétertartományt** is. A `sin` és a `cos` a Processingben `sin()` és `cos()` formában szerepel; a `π` megfelelője a `PI`, a `2π` megfelelője a `TWO_PI`. Egy internetről talált új görbét is ugyanígy lehet kipróbálni: a képleteket átírjuk Processing-utasításokra, megadjuk a tartományt és szükség esetén az alakparamétereket.
+\[
+\begin{aligned}
+x(t) &= R\cos t,\\
+y(t) &= R\sin t,\\
+t &\in [0,2\pi].
+\end{aligned}
+\]
+
+Minden paraméterértékhez kiszámítunk egy pontot, majd az egymást követő pontokat összekötjük. Ha elég sok pontot számítunk, a vonal folyamatos görbének látszik.
+
+A fejezetben a képletek mellett mindenhol megadjuk a **paramétertartományt** is. A \(\sin\) és a \(\cos\) Processingben `sin()` és `cos()` formában szerepel; a \(\pi\) megfelelője a `PI`, a \(2\pi\) megfelelője a `TWO_PI`. Egy internetről talált új görbét is ugyanígy lehet kipróbálni: a képleteket átírjuk Processing-utasításokra, megadjuk a tartományt és szükség esetén az alakparamétereket.
 
 **Általános rajzolóprogram.** A következő programban a `curveX()` és `curveY()` függvények, valamint a `tMin`, `tMax` értékek cserélhetők. A ciklus és a rajzolás szerkezete változatlan marad. Az első példa egy Lissajous-görbét rajzol. Ennek paraméteres leírása:
 
-- `x(t) = A sin(a t)`
-- `y(t) = B sin(b t + δ)`
-- `t ∈ [0, 2π]`
+\[
+\begin{aligned}
+x(t) &= A\sin(at),\\
+y(t) &= B\sin(bt+\delta),\\
+t &\in [0,2\pi].
+\end{aligned}
+\]
 
-Az `A` és `B` a vízszintes és függőleges kiterjedést, az `a` és `b` a két rezgés gyakoriságát, a `δ` (delta) pedig a fáziseltolást határozza meg. A példaprogramban `A = 240`, `B = 180`, `a = 3`, `b = 4`, `δ = π/2`.
+Az \(A\) és \(B\) a vízszintes és függőleges kiterjedést, az \(a\) és \(b\) a két rezgés gyakoriságát, a \(\delta\) (delta) pedig a fáziseltolást határozza meg. A példaprogramban \(A=240\), \(B=180\), \(a=3\), \(b=4\) és \(\delta=\pi/2\).
 
 :::processing-example title="Paraméteres görbe – újrahasználható 2D-s programváz" image="media/01-lissajous.webp"
 ```processing
@@ -59,9 +73,14 @@ Néhány ismert görbén jól megfigyelhető, mennyire eltérő képet adhat ugy
 
 **Rózsagörbe.** A görbe polárkoordinátás leírása alapján először kiszámítjuk a középponttól mért távolságot, majd ebből a két koordinátát:
 
-- `r(t) = A cos(k t)`
-- `x(t) = r(t) cos(t)`, `y(t) = r(t) sin(t)`
-- `t ∈ [0, 2π]`
+\[
+\begin{aligned}
+r(t) &= A\cos(kt),\\
+x(t) &= r(t)\cos t,\\
+y(t) &= r(t)\sin t,\\
+t &\in [0,2\pi].
+\end{aligned}
+\]
 
 A `k` határozza meg a szirmok elrendezését. Ha `k` páratlan egész szám, akkor `k` szirom keletkezik; páros egész `k` esetén `2k` szirom. A példában `A = 245`, `k = 7`.
 
@@ -94,9 +113,15 @@ void setup() {
 
 **Hipotrochoid.** Egy kisebb kör egy nagyobb kör **belső oldalán** gördül. Egy vele együtt mozgó pont pályáját rajzoljuk meg. Paraméteres egyenletei:
 
-- `x(t) = (R − r) cos(t) + d cos(((R − r)/r) t)`
-- `y(t) = (R − r) sin(t) − d sin(((R − r)/r) t)`
-- `t ∈ [0, 4π]` az itt választott `R = 180`, `r = 40` értékeknél.
+\[
+\begin{aligned}
+x(t) &= (R-r)\cos t + d\cos\left(\frac{R-r}{r}t\right),\\
+y(t) &= (R-r)\sin t - d\sin\left(\frac{R-r}{r}t\right),\\
+t &\in [0,4\pi].
+\end{aligned}
+\]
+
+Az itt választott paraméterek: \(R=180\) és \(r=40\).
 
 Az `R` a rögzített kör sugara, az `r` a gördülő kör sugara, a `d` pedig a rajzolópont távolsága a gördülő kör középpontjától. A példában `d = 105`, tehát a pont a kisebb körön kívül helyezkedik el. A tartományra figyelni kell: bizonyos sugárarányoknál a görbe egyetlen körbefordulás alatt nem záródik.
 
@@ -131,9 +156,15 @@ void setup() {
 
 **Epiciklois.** Most a kisebb kör a nagyobb kör **külső oldalán** gördül, a rajzolópont pedig a kisebb kör kerületén helyezkedik el. A csúcsokban találkozó ívek számát a két sugár aránya befolyásolja.
 
-- `x(t) = (R + r) cos(t) − r cos(((R + r)/r) t)`
-- `y(t) = (R + r) sin(t) − r sin(((R + r)/r) t)`
-- `t ∈ [0, 2π]` az itt választott `R = 140`, `r = 35` értékeknél.
+\[
+\begin{aligned}
+x(t) &= (R+r)\cos t - r\cos\left(\frac{R+r}{r}t\right),\\
+y(t) &= (R+r)\sin t - r\sin\left(\frac{R+r}{r}t\right),\\
+t &\in [0,2\pi].
+\end{aligned}
+\]
+
+Az itt választott értékek: \(R=140\) és \(r=35\).
 
 :::processing-example title="Epiciklois – külső körön gördülő kör" image="media/03b-epiciklois.webp"
 ```processing
@@ -165,9 +196,15 @@ void setup() {
 
 **Epitrochoid.** A gördülés itt is a nagyobb kör külső oldalán történik, de a rajzolópont már nem feltétlenül a kisebb kör kerületén van. A pont távolságát a kisebb kör középpontjától a `d` paraméter adja meg.
 
-- `x(t) = (R + r) cos(t) − d cos(((R + r)/r) t)`
-- `y(t) = (R + r) sin(t) − d sin(((R + r)/r) t)`
-- `t ∈ [0, 2π]` az itt választott `R = 140`, `r = 35` értékeknél.
+\[
+\begin{aligned}
+x(t) &= (R+r)\cos t - d\cos\left(\frac{R+r}{r}t\right),\\
+y(t) &= (R+r)\sin t - d\sin\left(\frac{R+r}{r}t\right),\\
+t &\in [0,2\pi].
+\end{aligned}
+\]
+
+Az itt választott értékek: \(R=140\) és \(r=35\).
 
 Ha `d = r`, ugyanazt az epicikloist kapjuk, mint az előző példában. Ha `d` ettől eltér, az alakja is változik. A programban `d = 85`, ezért hurkolt mintát rajzolunk.
 
@@ -204,9 +241,16 @@ A hipotrochoid, az epiciklois és az epitrochoid esetében érdemes a `R`, `r` �
 
 **Archimédészi spirál.** A sugár a paraméterrel arányosan nő:
 
-- `r(t) = a t`
-- `x(t) = a t cos(t)`, `y(t) = a t sin(t)`
-- `t ∈ [0, 2π · turns]`
+\[
+\begin{aligned}
+r(t) &= at,\\
+x(t) &= at\cos t,\\
+y(t) &= at\sin t,\\
+t &\in [0, 2\pi N].
+\end{aligned}
+\]
+
+Itt \(N\) a fordulatok száma, amelyet a programban a `turns` változó tárol.
 
 Az `a` értékének a programban a `growth` változó felel meg: azt mutatja, milyen gyorsan távolodunk a középponttól. A `turns` a körbefordulások száma. Ha valamelyik paramétert módosítjuk, más méretű vagy sűrűségű spirált kapunk.
 
@@ -242,7 +286,13 @@ Az itt bemutatott görbéknél érdemes először csak egy-egy paramétert módo
 
 A görbe pontjaihoz nemcsak vonalszakaszokat rajzolhatunk. Ugyanezekre a koordinátákra köröket, négyzeteket vagy képeket is helyezhetünk. A `t` paraméter akár a rajzolt alakzat méretét, forgatását és színét is szabályozhatja.
 
-**Alakzatok elhelyezése.** Az első program egy Lissajous-görbe mentén színes köröket rajzol. A pálya képletei a korábbi példával azonosak (`x(t) = 240 sin(3t)` és `y(t) = 180 sin(4t + π/2)`, ahol `t ∈ [0, 2π]`). A körök méretét a `diameter = 5 + 9 · (1 + sin(7t))/2` kifejezés határozza meg, ezért a pontok különböző nagyságúak lesznek. A színük a `fill()` paramétereiben változik; a negyedik szám az áttetszőséget adja meg.
+**Alakzatok elhelyezése.** Az első program egy Lissajous-görbe mentén színes köröket rajzol. A pálya képletei a korábbi példával azonosak: \(x(t)=240\sin(3t)\), \(y(t)=180\sin(4t+\pi/2)\), ahol \(t\in[0,2\pi]\). A körök átmérőjét a következő kifejezés határozza meg:
+
+\[
+D(t)=5+9\,\frac{1+\sin(7t)}{2}.
+\]
+
+Emiatt a pontok különböző nagyságúak lesznek. A színük a `fill()` paramétereiben változik; a negyedik szám az áttetszőséget adja meg.
 
 :::processing-example title="Változó méretű körök egy görbe mentén" image="media/05-korok-gorben.webp"
 ```processing
@@ -267,7 +317,7 @@ void setup() {
 ```
 :::
 
-**Forgatott négyzetek.** Most egy ellipszisre helyezzük a négyzetek középpontját: `x(t) = 235 cos(t)`, `y(t) = 170 sin(t)`, ahol `t ∈ [0, 2π]`. A korábban tanult `pushMatrix()` és `popMatrix()` biztosítja, hogy minden négyzet saját helyen és szögben rajzolódjon ki. A `rotate(2 * t)` a négyzetet a körbejárás során kétszer forgatja meg, a `scale(s)` pedig a méretét változtatja. Itt `s(t) = 0.7 + 0.35 sin(5t)`, ezért a méret periodikusan nő és csökken. A transzformációkat a rajzolás után visszaállítjuk, így nem halmozódnak fel a következő négyzetnél.
+**Forgatott négyzetek.** Most egy ellipszisre helyezzük a négyzetek középpontját: \(x(t)=235\cos t\) és \(y(t)=170\sin t\), ahol \(t\in[0,2\pi]\). A korábban tanult `pushMatrix()` és `popMatrix()` biztosítja, hogy minden négyzet saját helyen és szögben rajzolódjon ki. A `rotate(2 * t)` a négyzetet a körbejárás során kétszer forgatja meg, a `scale(s)` pedig a méretét változtatja. Itt `s(t) = 0.7 + 0.35 sin(5t)`, ezért a méret periodikusan nő és csökken. A transzformációkat a rajzolás után visszaállítjuk, így nem halmozódnak fel a következő négyzetnél.
 
 :::processing-example title="A görbe mentén forgó és méretezett négyzetek" image="media/06-negyzetek-gorben.webp"
 ```processing
@@ -344,13 +394,18 @@ A kék pontok a görbe végpontjai, a narancssárgák a két belső kontrollpont
 
 ## Térbeli görbék {#terbeli-gorbek}
 
-Térben ugyanaz a módszer működik, mint síkban, csak a pontnak **harmadik koordinátája is van**. A görbe egy pontját így `x(t)`, `y(t)` és `z(t)` határozza meg. A `P3D` megjelenítési módot használjuk, és a `vertex()` már három értéket kap. A `rotateX()` és `rotateY()` nem változtatják meg a görbe képletét: a teljes koordinátarendszert forgatják, hogy a térbeli forma több oldalról is látszódjon.
+Térben ugyanaz a módszer működik, mint síkban, csak a pontnak **harmadik koordinátája is van**. A görbe egy pontját így \(x(t)\), \(y(t)\) és \(z(t)\) határozza meg. A `P3D` megjelenítési módot használjuk, és a `vertex()` már három értéket kap. A `rotateX()` és `rotateY()` nem változtatják meg a görbe képletét: a teljes koordinátarendszert forgatják, hogy a térbeli forma több oldalról is látszódjon.
 
 **Általános térbeli programváz.** A következő program egy csavarvonalat rajzol. A térbeli görbe alakja a három `curveX()`, `curveY()` és `curveZ()` függvény, valamint a paramétertartomány cseréjével változtatható. Ennek a csavarvonalnak az egyenletei:
 
-- `x(t) = R cos(t)`, `y(t) = R sin(t)`
-- `z(t) = z0 + h t`
-- `t ∈ [0, 6π]`
+\[
+\begin{aligned}
+x(t) &= R\cos t,\\
+y(t) &= R\sin t,\\
+z(t) &= z_0+ht,\\
+t &\in [0,6\pi].
+\end{aligned}
+\]
 
 A programban `R = 135`, `z0 = −210`, `h = 22`. Az `R` a csavarvonal sugara, a `h` pedig azt szabályozza, milyen gyorsan változik a magasság a paraméter növelésével.
 
@@ -392,10 +447,14 @@ A `curveX()` és `curveY()` körmozgást írnak le, miközben a `curveZ()` folya
 
 **Tóruszcsomó.** Egy térben önmagába visszatérő görbét is létrehozhatunk. A paraméteres egyenletek például így adhatók meg:
 
-- `x(t) = (R + r cos(qt)) cos(pt)`
-- `y(t) = (R + r cos(qt)) sin(pt)`
-- `z(t) = r sin(qt)`
-- `t ∈ [0, 2π]`
+\[
+\begin{aligned}
+x(t) &= (R+r\cos(qt))\cos(pt),\\
+y(t) &= (R+r\cos(qt))\sin(pt),\\
+z(t) &= r\sin(qt),\\
+t &\in [0,2\pi].
+\end{aligned}
+\]
 
 A `R` a nagyobb körsugár, az `r` a kisebb, a `p` és `q` pedig azt határozza meg, hány fordulatot végez a görbe a tórusz két alapvető iránya körül. A programban `R = 180`, `r = 68`, `p = 2`, `q = 3`. A program nem egy tóruszfelületet rajzol, hanem egyetlen térbeli vonalat.
 
@@ -469,7 +528,7 @@ void draw() {
 
 ### Csavarodó keresztmetszetek egy görbe mentén
 
-A görbe mentén elhelyezett alakzatot a helyváltoztatás mellett **folyamatosan forgathatjuk vagy méretezhetjük** is. A pálya itt egy kör: `x(t) = 185 cos(t)`, `y(t) = 185 sin(t)`, `z(t) = 0`, ahol `t ∈ [0, 2π]`. Ennek egyszerű szemléltetése egy körpálya mentén elhelyezett négyzetek sora. A négyzetek síkját először a körpálya érintőjére merőlegesen állítjuk, majd a teljes körbejárás alatt mindegyiket egyre nagyobb szögben elforgatjuk a helyi érintő körül.
+A görbe mentén elhelyezett alakzatot a helyváltoztatás mellett **folyamatosan forgathatjuk vagy méretezhetjük** is. A pálya itt egy kör: \(x(t)=185\cos t\), \(y(t)=185\sin t\), \(z(t)=0\), ahol \(t\in[0,2\pi]\). Ennek egyszerű szemléltetése egy körpálya mentén elhelyezett négyzetek sora. A négyzetek síkját először a körpálya érintőjére merőlegesen állítjuk, majd a teljes körbejárás alatt mindegyiket egyre nagyobb szögben elforgatjuk a helyi érintő körül.
 
 :::processing-example title="Kör mentén csavarodó négyzet-keresztmetszetek" image="media/11-csavart-keresztmetszet.webp"
 ```processing
@@ -514,11 +573,15 @@ A fejezet végén két összetettebb alkotást készítünk. Az első síkbeli v
 
 A kiindulás egy lassan csillapodó Lissajous-jellegű görbe. A koordinátáit például ezek a függvények adják:
 
-- `x(t) = A e^(−λt) sin(a t + δ)`
-- `y(t) = B e^(−λt) sin(b t)`
-- `t ∈ [0, 12π]`
+\[
+\begin{aligned}
+x(t) &= A e^{-\lambda t}\sin(at+\delta),\\
+y(t) &= B e^{-\lambda t}\sin(bt),\\
+t &\in [0,12\pi].
+\end{aligned}
+\]
 
-A `e^(−λt)` **csillapítási tényező**, amely a paraméter növekedésével egyre kisebb lesz. A Processing `exp(u)` függvénye az `e^u` értéket számítja ki, ahol `e ≈ 2,718`. Ezért a kódban az `exp(-0.045 * t)` a kezdetben 1 körüli szorzót fokozatosan 0 felé csökkenti. A `damping` változó neve angolul csillapítást jelent, és ezt a kiszámított szorzót tárolja; nem a Processing beépített változója. A `0.045` helyére nagyobb értéket írva a görbe gyorsabban húzódik a középpont felé. A további változatokban több, kissé eltérő paraméterű görbét rajzolunk egymásra.
+Az \(e^{-\lambda t}\) **csillapítási tényező**, amely \(\lambda>0\) esetén a paraméter növekedésével egyre kisebb lesz. A Processing `exp(u)` függvénye az \(e^u\) értéket számítja ki, ahol \(e\approx2{,}718\). Ezért a kódban az `exp(-0.045 * t)` a kezdetben 1 körüli szorzót fokozatosan 0 felé csökkenti. A `damping` változó neve angolul csillapítást jelent, és ezt a kiszámított szorzót tárolja; nem a Processing beépített változója. A `0.045` helyére nagyobb értéket írva a görbe gyorsabban húzódik a középpont felé. A további változatokban több, kissé eltérő paraméterű görbét rajzolunk egymásra.
 
 **1. változat – egyetlen csillapodó görbe.**
 
@@ -650,7 +713,7 @@ void drawMotif(float cx, float cy,
 
 ### 2. Térbeli kompozíció csavarodó keresztmetszetekből
 
-A második kompozíciót egy térbeli körpályából építjük fel. A pálya képletei `x(t) = 185 cos(t)`, `y(t) = 185 sin(t)`, `z(t) = 0`, ahol `t ∈ [0, 2π]`. Először csak a pályát rajzoljuk meg, majd négyzetes keresztmetszeteket helyezünk el rajta. Ezután a keresztmetszeteket a pálya érintőjének irányában elforgatjuk, végül több, eltérő paraméterű rendszert helyezünk el ugyanabban a jelenetben.
+A második kompozíciót egy térbeli körpályából építjük fel. A pálya képletei \(x(t)=185\cos t\), \(y(t)=185\sin t\), \(z(t)=0\), ahol \(t\in[0,2\pi]\). Először csak a pályát rajzoljuk meg, majd négyzetes keresztmetszeteket helyezünk el rajta. Ezután a keresztmetszeteket a pálya érintőjének irányában elforgatjuk, végül több, eltérő paraméterű rendszert helyezünk el ugyanabban a jelenetben.
 
 **1. változat – a körpálya megjelenítése.** A pálya vonalát a `vertex(x, y, z)` segítségével állítjuk elő.
 
@@ -710,7 +773,7 @@ void draw() {
 ```
 :::
 
-**3. változat – csavarodó keresztmetszetek.** A helyi elforgatás szögét a `t` paraméterből számítjuk: `szög(t) = t`. A `rotateY(t)` a négyzetet az aktuális helyi tengely körül forgatja. Így egy teljes körbejárás alatt a négyzet egyszer körbefordul a keresztmetszeti síkjában.
+**3. változat – csavarodó keresztmetszetek.** A helyi elforgatás szögét a \(t\) paraméterből számítjuk: \(\varphi(t)=t\). A `rotateY(t)` a négyzetet az aktuális helyi tengely körül forgatja. Így egy teljes körbejárás alatt a négyzet egyszer körbefordul a keresztmetszeti síkjában.
 
 :::processing-example title="Térbeli kompozíció – 3. változat" image="media/18-terbeli-kompozicio-3.webp"
 ```processing
