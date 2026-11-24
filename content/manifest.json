@@ -102,7 +102,25 @@
       "group": "Témakörök",
       "title": "Görbék",
       "description": "Paraméteres görbék, alakparaméterek, kontrollpontok, görbék mentén változó alakzatok, 2D és 3D kompozíciók.",
-      "file": "content/chapters/10-gorbek/index.md",
+      "file": "content/chapters/10-gorbek/index.md"
+    },
+    {
+      "id": "11-feluletek",
+      "order": 11,
+      "navNumber": "11",
+      "group": "Témakörök",
+      "title": "Felületek",
+      "description": "Explicit és paraméteres térbeli felületek, kontrollhálók, Bézier-felület, animált és interaktív alkalmazások.",
+      "file": "content/chapters/11-feluletek/index.md"
+    },
+    {
+      "id": "12-adatvizualizacio",
+      "order": 12,
+      "navNumber": "12",
+      "group": "Témakörök",
+      "title": "Adatok vizuális megjelenítése",
+      "description": "Szöveg- és CSV-adatok feldolgozása, statisztikai vizualizációk 2D-ben és 3D-ben, dokumentált adatforrások.",
+      "file": "content/chapters/12-adatvizualizacio/index.md",
       "hideNext": true
     }
   ]
